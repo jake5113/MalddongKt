@@ -19,8 +19,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:text="로그인"
-        android:textSize="32sp"
-        android:textStyle="bold" />
+        android:fontFamily="@font/lineseedsanskr_bd"
+        android:textSize="32sp" />
 
     <EditText
         android:layout_width="wrap_content"
