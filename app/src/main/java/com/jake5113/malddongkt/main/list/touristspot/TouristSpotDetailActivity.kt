@@ -1,13 +1,12 @@
-package com.jake5113.malddongkt.main
+package com.jake5113.malddongkt.main.list.touristspot
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.jake5113.malddongkt.R
 
-class MainActivity : AppCompatActivity() {
+class TouristSpotDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_tourist_spot_detail)
     }
 }
-//0544403081/3078/4시3073
