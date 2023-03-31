@@ -8,19 +8,19 @@
     tools:context=".main.MainActivity">
 
     <LinearLayout
-        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:orientation="vertical"
         android:padding="16dp">
 
         <!--Tab Map AppBarLayout-->
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar_map"
-            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                 <androidx.appcompat.widget.SearchView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right" />
+                    android:layout_gravity="end" />
 
             </androidx.appcompat.widget.Toolbar>
 
@@ -56,23 +56,16 @@
 
             </LinearLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:orientation="horizontal">
-
-            </RelativeLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
 
         <!--Tab Map AppBarLayout-->
         <com.google.android.material.appbar.AppBarLayout
-            android:visibility="gone"
             android:id="@+id/appbar_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="visible">
 
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
@@ -82,7 +75,7 @@
                 <androidx.appcompat.widget.SearchView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right" />
+                    android:layout_gravity="end" />
 
             </androidx.appcompat.widget.Toolbar>
 
@@ -114,17 +107,21 @@
                 android:layout_marginTop="4dp"
                 android:orientation="horizontal">
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/ic_list"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:background="#00000000"
+                    android:scaleType="fitXY"
                     android:src="@drawable/ic_list_recycler" />
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/ic_grid"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_toRightOf="@id/ic_list"
+                    android:layout_toEndOf="@id/ic_list"
+                    android:background="#00000000"
+                    android:scaleType="fitXY"
                     android:src="@drawable/ic_grid_recycler" />
 
                 <Spinner
@@ -139,11 +136,14 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment_container_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="bottom"
