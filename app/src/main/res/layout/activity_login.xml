@@ -18,23 +18,72 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:text="로그인"
         android:fontFamily="@font/lineseedsanskr_bd"
+        android:text="로그인"
         android:textSize="32sp" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/bg_login_id"
-      />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp">
 
-    <EditText
+        <EditText
+            android:id="@+id/et_id"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_login"
+            android:hint="아이디"
+            android:inputType="textEmailAddress"
+            android:padding="16dp"
+            android:paddingStart="50dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_alignStart="@id/et_id"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_id" />
+
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_below="@id/et_id"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_login"
+            android:hint="비밀번호"
+            android:inputType="textPassword"
+            android:padding="16dp"
+            android:paddingStart="50dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_below="@id/et_id"
+            android:layout_alignStart="@id/et_password"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_password" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_alignTop="@id/et_password"
+            android:layout_alignEnd="@id/et_password"
+            android:background="#00000000"
+            android:padding="16dp"
+            android:src="@drawable/baseline_visibility_off_24" />
+
+    </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/btn_kakao_login"
+        android:src="@drawable/btn_login_kakao"
+        android:background="#00000000"
+        android:scaleType="centerInside"
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/bg_login_password"
-        />
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>

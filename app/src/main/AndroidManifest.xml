@@ -2,13 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" >
 
+    <!--TODO 아이콘 -> mipmap-->
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/malddong"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/malddong"
         android:supportsRtl="true"
         android:theme="@style/Theme.MalddongKt"
         tools:targetApi="31" >
@@ -16,16 +17,17 @@
             android:name=".main.map.MapActivity"
             android:exported="false" />
         <activity
-            android:name=".main.list.touristspot.TouristSpotDetailActivity"
+            android:name=".main.touristspot.TouristSpotDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".main.list.toilet.ToiletDetailActivity"
+            android:name=".main.toilet.ToiletDetailActivity"
             android:exported="false" />
         <activity
             android:name=".login.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".intro.SplashActivity"
+            android:theme="@style/MalddongSplashTheme"
+            android:name=".intro.MalddongSplashActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,7 +36,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".main.list.ListActivity"
+            android:name=".main.MainActivity"
             android:exported="false" />
     </application>
 

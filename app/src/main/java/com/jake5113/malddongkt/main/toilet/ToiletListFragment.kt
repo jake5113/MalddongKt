@@ -1,4 +1,4 @@
-package com.jake5113.malddongkt.main.list.toilet
+package com.jake5113.malddongkt.main.toilet
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

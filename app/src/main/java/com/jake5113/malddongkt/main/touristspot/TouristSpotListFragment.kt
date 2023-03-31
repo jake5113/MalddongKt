@@ -1,4 +1,4 @@
-package com.jake5113.malddongkt.main.list.touristspot
+package com.jake5113.malddongkt.main.touristspot
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
