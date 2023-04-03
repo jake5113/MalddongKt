@@ -45,14 +45,15 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.espresso.core)
+
     implementation(libs.glide)
     implementation(libs.gson)
     implementation(libs.retrofit)
     implementation(libs.converter.scalars)
     implementation(libs.converter.gson)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.espresso.core)
 
     // Android 12 splash screen to all devices from API 23
     // implementation("androidx.core:core-splashscreen:1.0.0")

@@ -107,22 +107,27 @@
                 android:layout_marginTop="4dp"
                 android:orientation="horizontal">
 
-                <ImageButton
-                    android:id="@+id/ic_list"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="#00000000"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_list_recycler" />
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                <ImageButton
-                    android:id="@+id/ic_grid"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_toEndOf="@id/ic_list"
-                    android:background="#00000000"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_grid_recycler" />
+                    <RadioButton
+                        android:id="@+id/ic_list"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/btn_radio_recycler_list_style"
+                        android:button="null"
+                        android:scaleType="fitXY" />
+
+                    <RadioButton
+                        android:id="@+id/ic_grid"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/btn_radio_recycler_grid_style"
+                        android:button="null"
+                        android:scaleType="fitXY" />
+                </RadioGroup>
 
                 <Spinner
                     android:id="@+id/spinner"

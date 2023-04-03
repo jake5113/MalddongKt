@@ -3,7 +3,6 @@ package com.jake5113.malddongkt.main
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.get
 import com.jake5113.malddongkt.R
 import com.jake5113.malddongkt.databinding.ActivityMainBinding
 import com.jake5113.malddongkt.main.map.NaverMapFragment
