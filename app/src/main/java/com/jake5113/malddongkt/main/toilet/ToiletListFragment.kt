@@ -5,7 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
+import androidx.recyclerview.widget.RecyclerView.Orientation
+import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.jake5113.malddongkt.databinding.FragmentToiletListBinding
+import com.jake5113.malddongkt.main.MainActivity
 
 class ToiletListFragment : Fragment() {
     lateinit var binding: FragmentToiletListBinding

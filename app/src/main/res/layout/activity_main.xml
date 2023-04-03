@@ -12,7 +12,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:paddingHorizontal="8dp">
 
         <!--Tab Map AppBarLayout-->
         <com.google.android.material.appbar.AppBarLayout
@@ -25,7 +25,6 @@
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize">
-
 
                 <androidx.appcompat.widget.SearchView
                     android:layout_width="wrap_content"
@@ -72,6 +71,7 @@
                 android:layout_height="?attr/actionBarSize">
 
 
+
                 <androidx.appcompat.widget.SearchView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -113,19 +113,19 @@
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/ic_list"
+                        android:id="@+id/radiobtn_list"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:background="@drawable/btn_radio_recycler_list_style"
-                        android:button="null"
+                        android:button="@font/lineseedsans_a_bd"
                         android:scaleType="fitXY" />
 
                     <RadioButton
-                        android:id="@+id/ic_grid"
+                        android:id="@+id/radiobtn_grid"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:background="@drawable/btn_radio_recycler_grid_style"
-                        android:button="null"
+                        android:button="@font/lineseedsans_a_bd"
                         android:scaleType="fitXY" />
                 </RadioGroup>
 
