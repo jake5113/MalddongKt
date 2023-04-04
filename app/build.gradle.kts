@@ -1,3 +1,4 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.com.android.application)
     alias(libs.plugins.org.jetbrains.kotlin.android)
@@ -59,5 +60,5 @@ dependencies {
     // implementation("androidx.core:core-splashscreen:1.0.0")
 
     // 네이버 지도 SDK
-/*    implementation (libs.map.sdk)*/
+    implementation (libs.map.sdk)
 }

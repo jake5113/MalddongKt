@@ -6,14 +6,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.jake5113.malddongkt.R
+import com.jake5113.malddongkt.databinding.FragmentNaverMapBinding
+import com.naver.maps.map.MapFragment
+import com.naver.maps.map.NaverMap
+import com.naver.maps.map.OnMapReadyCallback
 
-class NaverMapFragment : Fragment() {
-
+class NaverMapFragment : Fragment(), OnMapReadyCallback {
+    lateinit var binding: FragmentNaverMapBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_naver_map, container, false)
+        binding = FragmentNaverMapBinding.inflate(inflater, container, false)
+
+        val fm = childFragmentManager
+        val mapFragment = fm.findFragmentById(R.id.navermap_container) as MapFragment?
+            ?: MapFragment.newInstance().also {
+                fm.beginTransaction().add(R.id.navermap_container, it).commit()
+            }
+
+        mapFragment.getMapAsync(this)
+
+        return binding.root
+    }
+
+    override fun onMapReady(naverMap: NaverMap) {
+
     }
 }
