@@ -57,4 +57,7 @@ dependencies {
 
     // Android 12 splash screen to all devices from API 23
     // implementation("androidx.core:core-splashscreen:1.0.0")
+
+    // 네이버 지도 SDK
+/*    implementation (libs.map.sdk)*/
 }

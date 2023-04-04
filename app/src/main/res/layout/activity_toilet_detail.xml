@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="8dp"
-    tools:context=".main.toilet.ToiletDetailActivity">
+    tools:context=".main.list.toilet.ToiletDetailActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-package com.jake5113.malddongkt.main.toilet
+package com.jake5113.malddongkt.main.list.toilet
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,14 +6,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
+import com.jake5113.malddongkt.databinding.ItemLongRecyclerBinding
 import com.jake5113.malddongkt.databinding.ItemShortRecyclerBinding
 
-class ToiletRecyclerAdapter(val context: Context, val items: MutableList<ToiletItem>) :
-    Adapter<ToiletRecyclerAdapter.VH>() {
-    inner class VH(var binding: ItemShortRecyclerBinding) : ViewHolder(binding.root)
+class ToiletLongRecyclerAdapter(val context: Context, val items: MutableList<ToiletItem>) :
+    Adapter<ToiletLongRecyclerAdapter.VH>() {
+    inner class VH(var binding: ItemLongRecyclerBinding) : ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH =
-        VH(ItemShortRecyclerBinding.inflate(LayoutInflater.from(context), parent, false))
+        VH(ItemLongRecyclerBinding.inflate(LayoutInflater.from(context), parent, false))
 
     override fun getItemCount(): Int = items.size
 

@@ -1,13 +1,12 @@
 package com.jake5113.malddongkt.main
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import com.jake5113.malddongkt.R
 import com.jake5113.malddongkt.databinding.ActivityMainBinding
+import com.jake5113.malddongkt.main.favorite.FavoriteFragment
 import com.jake5113.malddongkt.main.map.NaverMapFragment
-import com.jake5113.malddongkt.main.toilet.ToiletListFragment
+import com.jake5113.malddongkt.main.list.toilet.ToiletListFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -20,28 +19,26 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container_view, ToiletListFragment()).commit()
 
+        val toiletListFragment = ToiletListFragment()
+        val naverMapFragment = NaverMapFragment()
+        val favoriteFragment = FavoriteFragment()
 
+        // 리스트 계속 추가되는거 수정하기
         binding.bottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.item_list -> {
-                    binding.appbarMap.visibility = View.GONE
-                    binding.appbarList.visibility = View.VISIBLE
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container_view, ToiletListFragment()).commit()
+                        .replace(R.id.fragment_container_view, toiletListFragment).commit()
                 }
 
                 R.id.item_map -> {
-                    binding.appbarMap.visibility = View.VISIBLE
-                    binding.appbarList.visibility = View.GONE
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container_view, NaverMapFragment()).commit()
+                        .replace(R.id.fragment_container_view, naverMapFragment).commit()
                 }
 
                 R.id.item_favorite -> {
-                    binding.appbarMap.visibility = View.GONE
-                    binding.appbarList.visibility = View.VISIBLE
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container_view, NaverMapFragment()).commit()
+                        .replace(R.id.fragment_container_view, favoriteFragment).commit()
                 }
             }
             true

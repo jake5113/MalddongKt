@@ -1,4 +1,4 @@
-package com.jake5113.malddongkt.main.toilet
+package com.jake5113.malddongkt.main.list.toilet
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

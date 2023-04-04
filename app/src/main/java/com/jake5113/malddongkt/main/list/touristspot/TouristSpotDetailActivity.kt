@@ -1,4 +1,4 @@
-package com.jake5113.malddongkt.main.touristspot
+package com.jake5113.malddongkt.main.list.touristspot
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
