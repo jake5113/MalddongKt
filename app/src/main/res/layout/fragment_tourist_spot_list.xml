@@ -12,7 +12,7 @@
         layout="@layout/list_toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/short_recycler"
+        android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="4dp"

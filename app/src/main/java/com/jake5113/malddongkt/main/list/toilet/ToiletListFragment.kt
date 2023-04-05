@@ -1,16 +1,14 @@
 package com.jake5113.malddongkt.main.list.toilet
 
-import android.graphics.drawable.GradientDrawable.Orientation
-import android.icu.lang.UCharacter.VerticalOrientation
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.jake5113.malddongkt.R
 import com.jake5113.malddongkt.databinding.FragmentToiletListBinding
+import com.jake5113.malddongkt.main.list.touristspot.TouristSpotListFragment
 
 class ToiletListFragment : Fragment() {
     lateinit var binding: FragmentToiletListBinding
@@ -39,16 +37,20 @@ class ToiletListFragment : Fragment() {
         items.add(ToiletItem("주소13","이름13", mutableListOf("https://cdn.pixabay.com/photo/2023/03/25/16/02/hummingbird-7876355__340.jpg")))
         }
 
+        binding.toolbarToilet.tabTouristSpot.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_view, TouristSpotListFragment()).commit()
+        }
+
         binding.toolbarToilet.radiobtnGrid.setOnClickListener {
             binding.recycler.layoutManager = GridLayoutManager(context, 2)
-            binding.recycler.adapter = ToiletShortRecyclerAdapter(requireContext(), items)
+            binding.recycler.adapter = ToiletRecyclerAdapter(requireContext(), items, true)
         }
 
         binding.toolbarToilet.radiobtnList.setOnClickListener {
             binding.recycler.layoutManager = GridLayoutManager(context, 1)
-            binding.recycler.adapter = ToiletLongRecyclerAdapter(requireContext(), items)
+            binding.recycler.adapter = ToiletRecyclerAdapter(requireContext(), items, false)
         }
-        binding.recycler.adapter = ToiletShortRecyclerAdapter(requireContext(), items)
+        binding.recycler.adapter = ToiletRecyclerAdapter(requireContext(), items, true)
 
         return binding.root
     }
