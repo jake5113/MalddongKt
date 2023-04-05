@@ -29,6 +29,7 @@ map-sdk = { module = "com.naver.maps:map-sdk", version.ref = "map-sdk" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+circleimageview = { group = "de.hdodenhof", name = "circleimageview", version = "3.1.0" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "com-android-application" }

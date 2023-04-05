@@ -56,6 +56,8 @@ dependencies {
     implementation(libs.converter.scalars)
     implementation(libs.converter.gson)
 
+    implementation(libs.circleimageview)
+
     // Android 12 splash screen to all devices from API 23
     // implementation("androidx.core:core-splashscreen:1.0.0")
 

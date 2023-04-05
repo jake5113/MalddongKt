@@ -6,7 +6,6 @@
     </style>
 
     <style name="MalddongSplashTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:windowBackground">@drawable/malddong</item>
         <item name="backgroundTint">@color/white</item>
         <item name="android:windowFullscreen">true</item>
     </style>

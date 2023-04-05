@@ -7,7 +7,7 @@
         android:id="@+id/item_map"
         android:title="MAP" />
     <item
-        android:id="@+id/item_favorite"
-        android:title="FAVORITE" />
+        android:id="@+id/item_mypage"
+        android:title="MY PAGE" />
 
 </menu>
