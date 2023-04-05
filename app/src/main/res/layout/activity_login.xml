@@ -6,25 +6,26 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:weightSum="10"
+    android:weightSum="12"
     tools:context=".login.LoginActivity">
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="3" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:fontFamily="@font/lineseedsanskr_bd"
         android:text="로그인"
         android:textSize="32sp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp">
+        android:layout_height="0dp"
+        android:layout_weight="4">
 
         <EditText
             android:id="@+id/et_id"
@@ -80,10 +81,19 @@
     <ImageButton
         android:id="@+id/btn_kakao_login"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_height="0dp"
         android:background="#00000000"
         android:scaleType="centerInside"
         android:src="@drawable/btn_login_kakao" />
+
+    <Button
+        android:id="@+id/btn_no_login"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="둘러보기" />
 
 
 </LinearLayout>

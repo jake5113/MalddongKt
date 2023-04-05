@@ -14,7 +14,7 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnKakaoLogin.setOnClickListener {
+        binding.btnNoLogin.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
