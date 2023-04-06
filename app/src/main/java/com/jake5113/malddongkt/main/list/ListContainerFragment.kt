@@ -1,8 +1,11 @@
 package com.jake5113.malddongkt.main.list
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
@@ -29,11 +32,19 @@ class ListContainerFragment : Fragment() {
         binding.tabs.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 val transaction = childFragmentManager.beginTransaction()
-                when (tab?.position) {
-                    0 -> transaction.replace(R.id.fragments_container, ToiletListFragment()).commit()
-                    1 -> transaction.replace(R.id.fragments_container, TouristSpotListFragment()).commit()
-                    2 -> transaction.replace(R.id.fragments_container, ParkingListFragment()).commit()
-                    else -> transaction.replace(R.id.fragments_container, ToiletListFragment()).commit()
+                when (tab?.text) {
+                    "화장실" -> {
+                        val intent = Intent()
+                        transaction.replace(R.id.fragments_container, ToiletListFragment()).commit()
+                        binding.radiobtnGrid.setOnClickListener {
+                            intent.putExtra("listType", "grid")
+                        }
+                        binding.radiobtnList.setOnClickListener {
+                            intent.putExtra("listType", "linear")
+                        }
+                    }
+                    "관광지" -> transaction.replace(R.id.fragments_container, TouristSpotListFragment()).commit()
+                    "주차장" -> transaction.replace(R.id.fragments_container, ParkingListFragment()).commit()
                 }
             }
 
@@ -44,5 +55,9 @@ class ListContainerFragment : Fragment() {
             }
         })
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
     }
 }
