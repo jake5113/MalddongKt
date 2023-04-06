@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:weightSum="12"
+    tools:context=".login.LoginActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="3" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/lineseedsanskr_bd"
+        android:text="로그인"
+        android:textSize="32sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4">
+
+        <EditText
+            android:id="@+id/et_id"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_login"
+            android:hint="아이디"
+            android:inputType="textEmailAddress"
+            android:padding="16dp"
+            android:paddingStart="50dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_alignStart="@id/et_id"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_id" />
+
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_below="@id/et_id"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_login"
+            android:hint="비밀번호"
+            android:inputType="textPassword"
+            android:padding="16dp"
+            android:paddingStart="50dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_below="@id/et_id"
+            android:layout_alignStart="@id/et_password"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_password" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_alignTop="@id/et_password"
+            android:layout_alignEnd="@id/et_password"
+            android:background="#00000000"
+            android:padding="16dp"
+            android:src="@drawable/baseline_visibility_off_24" />
+
+    </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/btn_kakao_login"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:background="#00000000"
+        android:scaleType="centerInside"
+        android:src="@drawable/btn_login_kakao" />
+
+    <Button
+        android:id="@+id/btn_no_login"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="둘러보기" />
+
+
+</LinearLayout>
