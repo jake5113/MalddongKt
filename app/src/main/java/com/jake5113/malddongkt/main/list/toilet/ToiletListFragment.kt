@@ -37,11 +37,7 @@ class ToiletListFragment : Fragment() {
         items.add(ToiletItem("주소13","이름13", mutableListOf("https://cdn.pixabay.com/photo/2023/03/25/16/02/hummingbird-7876355__340.jpg")))
         }
 
-        binding.toolbarToilet.tabTouristSpot.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_view, TouristSpotListFragment()).commit()
-        }
-
-        binding.toolbarToilet.radiobtnGrid.setOnClickListener {
+/*        binding.toolbarToilet.radiobtnGrid.setOnClickListener {
             binding.recycler.layoutManager = GridLayoutManager(context, 2)
             binding.recycler.adapter = ToiletRecyclerAdapter(requireContext(), items, true)
         }
@@ -49,9 +45,12 @@ class ToiletListFragment : Fragment() {
         binding.toolbarToilet.radiobtnList.setOnClickListener {
             binding.recycler.layoutManager = GridLayoutManager(context, 1)
             binding.recycler.adapter = ToiletRecyclerAdapter(requireContext(), items, false)
-        }
+        }*/
+
         binding.recycler.adapter = ToiletRecyclerAdapter(requireContext(), items, true)
 
         return binding.root
     }
+
+
 }

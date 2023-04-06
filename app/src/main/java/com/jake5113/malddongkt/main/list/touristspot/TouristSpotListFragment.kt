@@ -35,7 +35,7 @@ class TouristSpotListFragment : Fragment() {
             items.add(TouristSpotItem("관광지11", "간단한 설명11!", "https://cdn.pixabay.com/photo/2023/03/27/14/18/british-shorthair-7880879_640.jpg"))
         }
 
-        binding.toolbarTouistSpot.radiobtnGrid.setOnClickListener {
+/*        binding.toolbarTouistSpot.radiobtnGrid.setOnClickListener {
             binding.recycler.layoutManager = GridLayoutManager(context, 2)
             binding.recycler.adapter = TouristSpotRecyclerAdapter(requireContext(), items, true)
         }
@@ -43,7 +43,7 @@ class TouristSpotListFragment : Fragment() {
         binding.toolbarTouistSpot.radiobtnList.setOnClickListener {
             binding.recycler.layoutManager = GridLayoutManager(context, 1)
             binding.recycler.adapter = TouristSpotRecyclerAdapter(requireContext(), items, false)
-        }
+        }*/
         binding.recycler.adapter = TouristSpotRecyclerAdapter(requireContext(), items, true)
 
         return binding.root
