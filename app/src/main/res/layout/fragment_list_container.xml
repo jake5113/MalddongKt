@@ -57,6 +57,7 @@
             android:orientation="horizontal">
 
             <RadioGroup
+                android:id="@+id/radiobtns"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -73,7 +74,7 @@
                     android:scaleType="center" />
 
                 <RadioButton
-                    android:id="@+id/radiobtn_list"
+                    android:id="@+id/radiobtn_linear"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_margin="4dp"
@@ -98,8 +99,8 @@
         </RelativeLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragments_container"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
