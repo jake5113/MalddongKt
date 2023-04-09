@@ -5,6 +5,7 @@
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
 
+
     <style name="MalddongSplashTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="backgroundTint">@color/white</item>
         <item name="android:windowFullscreen">true</item>

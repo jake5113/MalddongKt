@@ -232,21 +232,19 @@ class ListContainerFragment : Fragment() {
             when (checkedId) {
                 binding.radiobtnGrid.id -> {
                     radioState = RADIO_GRID
-                    if (binding.tabs[0].isSelected) toiletGrid()
-                    else if (binding.tabs[1].isSelected) touristGrid()
-                    else if (binding.tabs[2].isSelected) parkingGrid()
+                    if (binding.tabs.getTabAt(0)!!.isSelected) toiletGrid()
+                    else if (binding.tabs.getTabAt(1)!!.isSelected) touristGrid()
+                    else if (binding.tabs.getTabAt(2)!!.isSelected) parkingGrid()
                 }
 
                 binding.radiobtnLinear.id -> {
                     radioState = RADIO_LINEAR
-                    if (binding.tabs[0].isSelected) toiletLinear()
-                    else if (binding.tabs[1].isSelected) touristLinear()
-                    else if (binding.tabs[2].isSelected) parkingLinear()
+                    if (binding.tabs.getTabAt(0)!!.isSelected) toiletLinear()
+                    else if (binding.tabs.getTabAt(1)!!.isSelected) touristLinear()
+                    else if (binding.tabs.getTabAt(2)!!.isSelected) parkingLinear()
                 }
             }
         }
-
-        binding.radiobtns[0].isSelected = true
         binding.tabs.addOnTabSelectedListener(tabListner)
 
         binding.tabs.getTabAt(0)!!.select()
@@ -299,6 +297,8 @@ class ListContainerFragment : Fragment() {
         }
     }
 
+
+    // 어댑터 교체 함수
     fun toiletGrid() {
         binding.recycler.layoutManager = GridLayoutManager(context, 2)
         binding.recycler.adapter =

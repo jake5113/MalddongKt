@@ -71,6 +71,7 @@
                     android:layout_margin="4dp"
                     android:background="@drawable/btn_radio_recycler_grid_style"
                     android:button="@font/lineseedsans_a_bd"
+                    android:checked="true"
                     android:scaleType="center" />
 
                 <RadioButton

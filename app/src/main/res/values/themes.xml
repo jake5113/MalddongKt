@@ -7,7 +7,6 @@
 
     <style name="Theme.MalddongKt" parent="Base.Theme.MalddongKt" />
 
-
     <style name="MalddongSplashTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="backgroundTint">@color/white</item>
         <item name="android:windowFullscreen">true</item>
