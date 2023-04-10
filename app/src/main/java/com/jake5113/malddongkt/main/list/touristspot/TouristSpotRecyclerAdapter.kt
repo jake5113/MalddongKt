@@ -33,7 +33,8 @@ class TouristSpotRecyclerAdapter(val context: Context, private val items: Mutabl
     override fun onBindViewHolder(holder: VH, position: Int) {
         val item = items[position]
 
-        Glide.with(context).load(item.img_path).into(holder.ivImg)
+        // TODO 빈 그림 설정하기.
+        Glide.with(context).load(if(item.img_path != "") item.img_path else "").into(holder.ivImg)
         holder.tvName.text = item.title
         holder.tvAddress.text = item.introduction
         holder.tvDistance.text = "15m"

@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.jake5113.malddongkt.R
 
-class ParkingAdapter(val context: Context, private val items: MutableList<ParkingItem>, private val sizeShort:Boolean) :
-    Adapter<ParkingAdapter.VH>() {
+class ParkingRecyclerAdapter(val context: Context, private val items: MutableList<ParkingItem>, private val sizeShort:Boolean) :
+    Adapter<ParkingRecyclerAdapter.VH>() {
     inner class VH(itemView: View) : ViewHolder(itemView) {
         val ivImg : ImageView by lazy { itemView.findViewById(R.id.iv_img) }
         val tvName: TextView by lazy { itemView.findViewById(R.id.tv_name) }

@@ -3,6 +3,10 @@ package com.jake5113.malddongkt.main.list.parking
 
 import com.google.gson.annotations.SerializedName
 
+data class ParkingResponse(
+    val currentCount:String,
+    val data : MutableList<ParkingItem>
+)
 data class ParkingItem(
     @SerializedName("주차장명")
     var name: String,

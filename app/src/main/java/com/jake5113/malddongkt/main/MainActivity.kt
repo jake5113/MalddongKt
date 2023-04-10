@@ -6,8 +6,9 @@ import android.widget.Toast
 import com.jake5113.malddongkt.R
 import com.jake5113.malddongkt.databinding.ActivityMainBinding
 import com.jake5113.malddongkt.main.list.ListContainerFragment
-import com.jake5113.malddongkt.main.list.toilet.ToiletItem
+import com.jake5113.malddongkt.main.list.parking.ParkingResponse
 import com.jake5113.malddongkt.main.list.toilet.ToiletResponse
+import com.jake5113.malddongkt.main.list.touristspot.TouristResponse
 import com.jake5113.malddongkt.main.mypage.MypageFragment
 import com.jake5113.malddongkt.main.map.NaverMapFragment
 import com.jake5113.malddongkt.network.RetrofitApiService
@@ -21,8 +22,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     // Toilet JSON API parsing
-    var toiletResponse:ToiletResponse? = null
-    var toiletItemList:MutableList<ToiletItem> = mutableListOf()
+    var toiletResponse: ToiletResponse? = null
+    var touristResponse: TouristResponse? = null
+    var parkingResponse: ParkingResponse? = null
 
     val listContainerFragment = ListContainerFragment()
     val naverMapFragment = NaverMapFragment()
@@ -32,8 +34,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container_view, listContainerFragment).commit()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container_view, listContainerFragment).commit()
         // TODO 리스트 계속 추가되는거 확인하기
         binding.bottomNavigation.setOnItemSelectedListener {
             val transaction = supportFragmentManager.beginTransaction()
@@ -47,37 +49,64 @@ class MainActivity : AppCompatActivity() {
         }
         getToiletItems()
         getTouristSpotItems()
+        getParkingItems()
     }
 
     private fun getToiletItems() {
         val retrofit = RetrofitHelper.getRetrofitInstance("https://apis.data.go.kr/")
         val retrofitApiService = retrofit.create(RetrofitApiService::class.java)
-        retrofitApiService.getToiletItems(1,500).enqueue(
-            object : Callback<ToiletResponse>{
-            override fun onResponse(
-                call: Call<ToiletResponse>,
-                response: Response<ToiletResponse>
-            ) {
-                toiletResponse = response.body()
-                listContainerFragment.itemsToilet.addAll(toiletResponse?.response?.body?.items?.item!!)
-                listContainerFragment.binding.recycler.adapter!!.notifyDataSetChanged()
+        retrofitApiService.getToiletItems(1, 500).enqueue(
+            object : Callback<ToiletResponse> {
+                override fun onResponse(
+                    call: Call<ToiletResponse>,
+                    response: Response<ToiletResponse>
+                ) {
+                    toiletResponse = response.body()
+                    listContainerFragment.itemsToilet.addAll(toiletResponse?.response?.body?.items?.item!!)
+                    listContainerFragment.binding.recycler.adapter!!.notifyDataSetChanged()
+                }
 
-                // 테스트 토스트
-                Toast.makeText(this@MainActivity, "${toiletResponse?.response?.body?.items?.item?.size}", Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onFailure(call: Call<ToiletResponse>, t: Throwable) {
-                Toast.makeText(this@MainActivity, "네트워크 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
-            }
-        })
+                override fun onFailure(call: Call<ToiletResponse>, t: Throwable) {}
+            })
     }
 
     private fun getTouristSpotItems() {
         val retrofit = RetrofitHelper.getRetrofitInstance("http://api.jejuits.go.kr/")
+        val retrofitApiService = retrofit.create(RetrofitApiService::class.java)
+        retrofitApiService.getTouristItems().enqueue(object : Callback<TouristResponse> {
+            override fun onResponse(
+                call: Call<TouristResponse>,
+                response: Response<TouristResponse>
+            ) {
+                touristResponse = response.body()
+                listContainerFragment.itemsTourist.addAll(touristResponse?.info!!)
+                listContainerFragment.binding.recycler.adapter?.notifyDataSetChanged()
+            }
+
+            override fun onFailure(call: Call<TouristResponse>, t: Throwable) {}
+        })
+    }
+
+    private fun getParkingItems() {
+        val retrofit = RetrofitHelper.getRetrofitInstance("https://api.odcloud.kr/api/")
+        val retrofitApiService = retrofit.create(RetrofitApiService::class.java)
+        retrofitApiService.getParkingItems().enqueue(object : Callback<ParkingResponse> {
+            override fun onResponse(
+                call: Call<ParkingResponse>,
+                response: Response<ParkingResponse>
+            ) {
+                parkingResponse = response.body()
+                listContainerFragment.itemsParking.addAll(parkingResponse?.data!!)
+                listContainerFragment.binding.recycler.adapter?.notifyDataSetChanged()
+            }
+
+            override fun onFailure(call: Call<ParkingResponse>, t: Throwable) {}
+        })
     }
 
     // 뒤로가기 버튼 두번 클릭시 앱 종료하기
     private var backKeyPressedTime = 0L
+
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         if (currentTimeMillis() - backKeyPressedTime > 2000) {

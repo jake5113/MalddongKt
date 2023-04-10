@@ -1,5 +1,11 @@
 package com.jake5113.malddongkt.main.list.touristspot
 
+data class TouristResponse(
+    var info: MutableList<TouristSpotItem>,
+    var info_cnt: Int,
+    var result: String
+)
+
 data class TouristSpotItem(
     var title: String, // 이름
     var introduction: String = "-", // 소개
