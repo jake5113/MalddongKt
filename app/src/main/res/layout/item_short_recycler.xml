@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <ImageView
             android:id="@+id/iv_img"
             android:layout_width="match_parent"
@@ -41,7 +40,12 @@
             android:layout_marginTop="12dp"
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="12dp"
-            android:text="화장실 이름"
+            android:ellipsize="end"
+            android:fontFamily="@font/lineseedsanskr_bd"
+            android:maxEms="6"
+            android:maxLines="1"
+            android:text="이름"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <TextView
@@ -50,7 +54,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_name"
             android:layout_marginStart="12dp"
-            android:text="화장실 주소"
+            android:ellipsize="end"
+            android:fontFamily="@font/lineseedsanskr_rg"
+            android:maxLines="2"
+            android:text="제주특별자치도 제주시 구좌읍 세화리 1360"
             android:textSize="12sp" />
 
         <TextView
@@ -61,6 +68,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
+            android:fontFamily="@font/lineseedsanskr_bd"
             android:text="12m"
             android:textSize="12sp" />
 

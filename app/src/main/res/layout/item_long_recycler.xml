@@ -44,6 +44,9 @@
                 android:textOn="" />
 
             <TextView
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:fontFamily="@font/lineseedsanskr_bd"
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -51,10 +54,15 @@
                 android:layout_marginTop="50dp"
                 android:layout_marginEnd="12dp"
                 android:text="화장실 이름"
+                android:padding="4dp"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
             <TextView
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:padding="4dp"
+                android:fontFamily="@font/lineseedsanskr_rg"
                 android:id="@+id/tv_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -67,9 +75,13 @@
                 android:id="@+id/tv_distance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_address"
-                android:layout_alignStart="@id/tv_address"
-                android:layout_marginTop="6dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="12dp"
+                android:padding="8dp"
                 android:text="12m"
                 android:textSize="14sp" />
 
