@@ -57,13 +57,14 @@
         </RelativeLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_toilet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -72,20 +73,28 @@
             android:textSize="16sp" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@id/tv_toilet"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/iv_no_list_toilet"
+            android:src="@drawable/malddong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-    <LinearLayout
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_tourist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -94,20 +103,28 @@
             android:textSize="16sp" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@id/tv_tourist"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/iv_no_list_tourist"
+            android:src="@drawable/malddong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-    <LinearLayout
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_parking"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -116,12 +133,19 @@
             android:textSize="16sp" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@id/tv_parking"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/iv_no_list_parking"
+            android:src="@drawable/malddong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
 
 
 </LinearLayout>

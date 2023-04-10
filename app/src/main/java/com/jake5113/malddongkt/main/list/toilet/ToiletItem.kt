@@ -1,9 +1,34 @@
 package com.jake5113.malddongkt.main.list.toilet
 
+data class ToiletResponse(
+    var response: Response
+)
+
+data class Response(
+    var body: Body,
+    var header: Header
+)
+
+data class Header(
+    var resultCode: String,
+    var resultMsg: String
+)
+
+data class Body(
+    var items: Items,
+    var numOfRows: Int,
+    var pageNo: Int,
+    var totalCount: Int
+)
+
+data class Items(
+    var item: MutableList<ToiletItem>
+)
+
 data class ToiletItem(
     var toiletNm: String, // 화장실 명
     var lnmAdres: String, // 지번주소
-    var photo: List<String>, // 사진
+    var photo: List<String>?, // 사진
 
     var loCrdnt: String = "-", // 위도
     var laCrdnt: String = "-", // 경도
@@ -34,8 +59,8 @@ data class ToiletItem(
     constructor(
         toiletNm: String,
         lnmAdres: String,
-        photo: List<String>,
-    ) : this(toiletNm, lnmAdres, photo,"") {
+        photo: List<String>?,
+    ) : this(toiletNm, lnmAdres, photo, "") {
         this.toiletNm = toiletNm
         this.lnmAdres = lnmAdres
         this.photo = photo
