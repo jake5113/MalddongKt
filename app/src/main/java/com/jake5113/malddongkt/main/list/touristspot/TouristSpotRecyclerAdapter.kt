@@ -34,7 +34,7 @@ class TouristSpotRecyclerAdapter(val context: Context, private val items: Mutabl
         val item = items[position]
 
         // TODO 빈 그림 설정하기.
-        Glide.with(context).load(if(item.img_path != "") item.img_path else "").into(holder.ivImg)
+        Glide.with(context).load(if(item.img_path != "") item.img_path else R.drawable.malddong).into(holder.ivImg)
         holder.tvName.text = item.title
         holder.tvAddress.text = item.introduction
         holder.tvDistance.text = "15m"
