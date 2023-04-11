@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
-    <!--위치정보제공 퍼미션-->
+    <!-- 위치정보제공 퍼미션 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
@@ -23,7 +22,10 @@
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="3qper5n1kt" />
-
+        <activity
+            android:name=".main.list.parking.ParkingDetailActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".main.list.touristspot.TouristSpotDetailActivity"
             android:exported="false"

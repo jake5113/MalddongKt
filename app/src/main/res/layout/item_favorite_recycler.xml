@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    android:layout_width="180dp"
     android:layout_height="180dp"
     android:layout_margin="4dp"
     android:orientation="vertical"
@@ -40,35 +40,17 @@
             android:layout_marginTop="12dp"
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="12dp"
-            android:ellipsize="end"
-            android:fontFamily="@font/lineseedsanskr_bd"
-            android:maxEms="6"
-            android:maxLines="1"
-            android:text="이름"
-            android:textSize="14sp"
+            android:text="화장실 이름"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tv_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_name"
-            android:layout_marginStart="12dp"
-            android:ellipsize="end"
-            android:fontFamily="@font/lineseedsanskr_rg"
-            android:maxLines="2"
-            android:text="제주특별자치도 제주시 구좌읍 세화리 1360"
-            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tv_distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@id/tv_name"
+            android:layout_below="@id/tv_name"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
-            android:fontFamily="@font/lineseedsanskr_bd"
             android:text="12m"
             android:textSize="12sp" />
 
