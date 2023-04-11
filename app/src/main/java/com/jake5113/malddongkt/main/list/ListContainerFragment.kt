@@ -107,15 +107,21 @@ class ListContainerFragment : Fragment() {
 
                 // 화장실 - 지역 카테고리에 맞는 데이터 목록 추가
                 for (i in 0 until totalItemsToilet.size)
-                    if (totalItemsToilet[i].emdNm == selectedText) categoryItemsToilet.add(totalItemsToilet[i])
+                    if (totalItemsToilet[i].emdNm == selectedText) categoryItemsToilet.add(
+                        totalItemsToilet[i]
+                    )
 
                 // 관광지 - 지역 카테고리에 맞는 데이터 목록 추가
                 for (i in 0 until totalItemsTourist.size)
-                    if (totalItemsTourist[i].address.contains(selectedText)) categoryItemsTourist.add(totalItemsTourist[i])
+                    if (totalItemsTourist[i].address.contains(selectedText)) categoryItemsTourist.add(
+                        totalItemsTourist[i]
+                    )
 
                 // 주차장 - 지역 카테고리에 맞는 데이터 목록 추가
                 for (i in 0 until totalItemsParking.size)
-                    if (totalItemsParking[i].lnmAdres.contains(selectedText)) categoryItemsParking.add(totalItemsParking[i])
+                    if (totalItemsParking[i].lnmAdres.contains(selectedText)) categoryItemsParking.add(
+                        totalItemsParking[i]
+                    )
             }
 
             if (categoryItemsToilet.isNotEmpty())
