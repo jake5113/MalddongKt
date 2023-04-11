@@ -2,9 +2,11 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.MalddongKt" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
+        <item name="android:fontFamily">@font/lineseedsanskr_rg</item>
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
 
+    <style name="Theme.MalddongKt" parent="Base.Theme.MalddongKt" />
 
     <style name="MalddongSplashTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="backgroundTint">@color/white</item>

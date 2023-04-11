@@ -29,6 +29,10 @@ class MainActivity : AppCompatActivity() {
     val listContainerFragment = ListContainerFragment()
     val naverMapFragment = NaverMapFragment()
     val mypageFragment = MypageFragment()
+
+    var spinnerCategory = mutableListOf<String>()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -50,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         getToiletItems()
         getTouristSpotItems()
         getParkingItems()
+
     }
 
     private fun getToiletItems() {
@@ -62,11 +67,24 @@ class MainActivity : AppCompatActivity() {
                     response: Response<ToiletResponse>
                 ) {
                     toiletResponse = response.body()
-                    listContainerFragment.itemsToilet.addAll(toiletResponse?.response?.body?.items?.item!!)
+                    val toiletItemList = toiletResponse?.response?.body?.items?.item!!
+                    listContainerFragment.totalItemsToilet.addAll(toiletItemList)
+
+                    val hashSet = hashSetOf<String>()
+                    for (i in 0 until listContainerFragment.totalItemsToilet.size)
+                        hashSet.add(toiletItemList[i].emdNm)
+                    spinnerCategory.addAll(hashSet)
+                    spinnerCategory.sort()
+                    spinnerCategory.add(0, "전체")
+                    listContainerFragment.spinnerItemsCategory.addAll(spinnerCategory)
+                    listContainerFragment.adapter.notifyDataSetChanged()
+
                     listContainerFragment.binding.recycler.adapter!!.notifyDataSetChanged()
                 }
 
-                override fun onFailure(call: Call<ToiletResponse>, t: Throwable) {}
+                override fun onFailure(call: Call<ToiletResponse>, t: Throwable) {
+                    Toast.makeText(this@MainActivity, "인터넷 연결을 확인해주세요", Toast.LENGTH_SHORT).show()
+                }
             })
     }
 
@@ -79,7 +97,7 @@ class MainActivity : AppCompatActivity() {
                 response: Response<TouristResponse>
             ) {
                 touristResponse = response.body()
-                listContainerFragment.itemsTourist.addAll(touristResponse?.info!!)
+                listContainerFragment.totalItemsTourist.addAll(touristResponse?.info!!)
                 listContainerFragment.binding.recycler.adapter?.notifyDataSetChanged()
             }
 
@@ -96,7 +114,7 @@ class MainActivity : AppCompatActivity() {
                 response: Response<ParkingResponse>
             ) {
                 parkingResponse = response.body()
-                listContainerFragment.itemsParking.addAll(parkingResponse?.data!!)
+                listContainerFragment.totalItemsParking.addAll(parkingResponse?.data!!)
                 listContainerFragment.binding.recycler.adapter?.notifyDataSetChanged()
             }
 
