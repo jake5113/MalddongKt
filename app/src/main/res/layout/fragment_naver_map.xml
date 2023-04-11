@@ -11,7 +11,7 @@
         android:id="@+id/navermap_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/material_dynamic_neutral_variant50" />
+        android:background="#70777C" />
 
     <!--Tab Map AppBarLayout-->
     <com.google.android.material.appbar.AppBarLayout

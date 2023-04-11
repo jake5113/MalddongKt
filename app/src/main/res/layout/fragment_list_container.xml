@@ -105,11 +105,22 @@
         </RelativeLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_info_empty"
+            android:visibility="gone"
+            android:src="@drawable/malddong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="2dp" />
 
-
+    </RelativeLayout>
 </LinearLayout>

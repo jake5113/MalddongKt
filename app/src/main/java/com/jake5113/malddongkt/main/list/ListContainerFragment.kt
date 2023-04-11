@@ -9,7 +9,9 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayout.GONE
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
+import com.google.android.material.tabs.TabLayout.VISIBLE
 import com.jake5113.malddongkt.databinding.FragmentListContainerBinding
 import com.jake5113.malddongkt.main.list.parking.ParkingRecyclerAdapter
 import com.jake5113.malddongkt.main.list.parking.ParkingItem
@@ -26,9 +28,9 @@ class ListContainerFragment : Fragment() {
     val totalItemsTourist: MutableList<TouristSpotItem> = mutableListOf()
     val totalItemsParking: MutableList<ParkingItem> = mutableListOf()
 
-    var categoryItemsToilet: MutableList<ToiletItem> = mutableListOf()
-    var categoryItemsTourist: MutableList<TouristSpotItem> = mutableListOf()
-    var categoryItemsParking: MutableList<ParkingItem> = mutableListOf()
+    var categoryItemsToilet: MutableList<ToiletItem>? = mutableListOf()
+    var categoryItemsTourist: MutableList<TouristSpotItem>? = mutableListOf()
+    var categoryItemsParking: MutableList<ParkingItem>? = mutableListOf()
 
     var spinnerItemsCategory = mutableListOf<String>()
     lateinit var adapter: ArrayAdapter<String>
@@ -37,6 +39,7 @@ class ListContainerFragment : Fragment() {
         const val RADIO_GRID = 2
         const val RADIO_LINEAR = 1
     }
+
     var recyclerState = RADIO_GRID
 
     override fun onCreateView(
@@ -45,14 +48,18 @@ class ListContainerFragment : Fragment() {
     ): View? {
         binding = FragmentListContainerBinding.inflate(inflater, container, false)
         // 스피너 설정
-        adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerItemsCategory)
+        adapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            spinnerItemsCategory
+        )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinner.onItemSelectedListener = itemSelectedListener
 
         binding.spinner.adapter = adapter
 
         binding.searchView.setOnQueryTextFocusChangeListener { v, hasFocus ->
-            if(!hasFocus){
+            if (!hasFocus) {
                 binding.searchView.isIconified = true
             }
         }
@@ -88,7 +95,34 @@ class ListContainerFragment : Fragment() {
 
     val itemSelectedListener = object : AdapterView.OnItemSelectedListener {
         override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            val selectedText = parent?.getItemAtPosition(position).toString()
 
+
+            if (selectedText == "전체") return
+
+            // TODO 여기부터 수정! null? null X!?
+            categoryItemsToilet = null
+
+/*            categoryItemsTourist = null
+            categoryItemsParking = null*/
+
+            for (i in 0 until totalItemsToilet.size){
+                if(totalItemsToilet[i].emdNm == selectedText) categoryItemsToilet!!.add(totalItemsToilet[i])
+            }
+
+            if(categoryItemsToilet != null) {
+                binding.ivInfoEmpty.visibility = GONE
+                binding.recycler.adapter = ToiletRecyclerAdapter(requireContext(), categoryItemsToilet!!, true)
+            } else {
+                binding.ivInfoEmpty.visibility = VISIBLE
+            }
+
+/*            for (i in 0 until totalItemsTourist.size){
+                if(totalItemsTourist[i].address.contains(selectedText)) categoryItemsTourist.add(totalItemsTourist[i])
+            }
+            for (i in 0 until totalItemsParking.size){
+                if(totalItemsParking[i].lnmAdres.contains(selectedText)) categoryItemsParking.add(totalItemsParking[i])
+            }*/
         }
 
         override fun onNothingSelected(parent: AdapterView<*>?) {
