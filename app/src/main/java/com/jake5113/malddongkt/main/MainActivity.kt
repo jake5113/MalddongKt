@@ -38,9 +38,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_view, listContainerFragment).commit()
-        // TODO 리스트 계속 추가되는거 확인하기
+        getToiletItems()
+        getTouristSpotItems()
+        getParkingItems()
+
+        // 리스트 프래그먼트 열기
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container_view, listContainerFragment).commit()
         binding.bottomNavigation.setOnItemSelectedListener {
             val transaction = supportFragmentManager.beginTransaction()
             when (it.itemId) {
@@ -51,10 +54,6 @@ class MainActivity : AppCompatActivity() {
             transaction.commit()
             true
         }
-        getToiletItems()
-        getTouristSpotItems()
-        getParkingItems()
-
     }
 
     private fun getToiletItems() {

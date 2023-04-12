@@ -7,6 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.jake5113.malddongkt.R
 import com.jake5113.malddongkt.databinding.FragmentMypageBinding
+import com.jake5113.malddongkt.main.MainActivity
+import com.jake5113.malddongkt.main.list.ListContainerFragment
+import com.jake5113.malddongkt.main.list.toilet.ToiletItem
+import com.jake5113.malddongkt.main.list.toilet.ToiletRecyclerAdapter
+import com.jake5113.malddongkt.main.list.touristspot.TouristSpotItem
+import com.jake5113.malddongkt.main.list.touristspot.TouristSpotRecyclerAdapter
 
 class MypageFragment : Fragment() {
 
@@ -17,7 +23,8 @@ class MypageFragment : Fragment() {
     ): View? {
         binding = FragmentMypageBinding.inflate(inflater, container, false)
 
-
+        // 이 부분 수정하기 - 테스트중 favorite
+        //binding.recyclerFavToilet.adapter = TouristSpotRecyclerAdapter(requireContext(), list, false)
 
 
 

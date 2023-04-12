@@ -1,29 +1,22 @@
 package com.jake5113.malddongkt.main.list.toilet
 
 import android.content.Context
+import android.content.Intent
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.ToggleButton
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.jake5113.malddongkt.R
+import java.io.Serializable
 
-class ToiletRecyclerAdapter(
-    val context: Context,
-    private val items: MutableList<ToiletItem>,
-    private val sizeShort: Boolean
-) :
-    Adapter<ToiletRecyclerAdapter.VH>() {
-    inner class VH(itemView: View) : ViewHolder(itemView) {
-        val ivImg: ImageView by lazy { itemView.findViewById(R.id.iv_img) }
-        val tvName: TextView by lazy { itemView.findViewById(R.id.tv_name) }
-        val tvAddress: TextView by lazy { itemView.findViewById(R.id.tv_address) }
-        val tvDistance: TextView by lazy { itemView.findViewById(R.id.tv_distance) }
-    }
-
+class ToiletRecyclerAdapter(val context: Context, private val items: MutableList<ToiletItem>, private val sizeShort: Boolean) :
+    Adapter<VH>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         val itemShortView: View =
             LayoutInflater.from(context).inflate(R.layout.item_short_recycler, parent, false)
@@ -42,5 +35,23 @@ class ToiletRecyclerAdapter(
         holder.tvAddress.text = item.lnmAdres
         holder.tvDistance.text = "15m"
 
+        if(holder.btnFavorite.isSelected){
+            // TODO 좋아요 버튼 클릭시 이벤트 처리
+        }
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, ToiletDetailActivity::class.java)
+            intent.putExtra("toiletItem", item as Serializable)
+            context.startActivity(intent)
+        }
+
     }
+}
+
+class VH(itemView: View) : ViewHolder(itemView) {
+    val ivImg : ImageView by lazy { itemView.findViewById(R.id.iv_img) }
+    val tvName: TextView by lazy { itemView.findViewById(R.id.tv_name) }
+    val tvAddress: TextView by lazy { itemView.findViewById(R.id.tv_address) }
+    val tvDistance: TextView by lazy { itemView.findViewById(R.id.tv_distance) }
+    val btnFavorite: ToggleButton by lazy { itemView.findViewById(R.id.btn_favorite) }
 }
