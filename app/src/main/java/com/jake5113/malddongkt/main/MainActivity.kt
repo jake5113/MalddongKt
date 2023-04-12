@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
                     spinnerCategory.sort()
                     spinnerCategory.add(0, "전체")
                     listContainerFragment.spinnerItemsCategory.addAll(spinnerCategory)
-                    listContainerFragment.adapter.notifyDataSetChanged()
+                    listContainerFragment.spinnerAdapter.notifyDataSetChanged()
 
                     listContainerFragment.binding.recycler.adapter!!.notifyDataSetChanged()
                 }

@@ -33,15 +33,16 @@ class ListContainerFragment : Fragment() {
     var categoryItemsParking: MutableList<ParkingItem> = mutableListOf()
 
     var spinnerItemsCategory = mutableListOf<String>()
-    lateinit var adapter: ArrayAdapter<String>
+    lateinit var spinnerAdapter: ArrayAdapter<String>
 
     companion object { // Linear, Grid 클릭 시 값 저장
         const val RADIO_GRID = 2
         const val RADIO_LINEAR = 1
     }
 
-    var recyclerState = RADIO_GRID
-    var recyclerTypecheckedId = 0
+    // 초기값 설정.
+    private var recyclerState = RADIO_GRID
+    private var recyclerTypeCheckedId = 0 // 임시 데이터
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,23 +51,15 @@ class ListContainerFragment : Fragment() {
         binding = FragmentListContainerBinding.inflate(inflater, container, false)
 
         // 초기화
-        recyclerTypecheckedId = binding.radiobtnGrid.id
-
-        // 카테고리 전체에 해당하는 리스트를 추가하여 초기화
-        categoryItemsToilet = totalItemsToilet
-        categoryItemsTourist = totalItemsTourist
-        categoryItemsParking = totalItemsParking
+        recyclerTypeCheckedId = binding.radiobtnGrid.id
 
         // 스피너 설정
-        adapter = ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_spinner_item,
-            spinnerItemsCategory
-        )
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        //binding.spinner.onItemSelectedListener = itemSelectedListener
+        spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerItemsCategory)
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinner.onItemSelectedListener = itemSelectedListener
+        binding.spinner.adapter = spinnerAdapter
 
-        binding.spinner.adapter = adapter
+        // spinner를 생성후
 
         // 검색창에 포커스 돼있지 않으면 닫기.
         binding.searchView.setOnQueryTextFocusChangeListener { v, hasFocus ->
@@ -75,11 +68,11 @@ class ListContainerFragment : Fragment() {
 
         // 리사이클러 모양 타입 설정 리스너
         binding.rgRecyclerTypeSelection.setOnCheckedChangeListener { group, checkedId ->
-            recyclerTypecheckedId = checkedId
+            recyclerTypeCheckedId = checkedId
             checkStateAndType()
         }
 
-        binding.tabs.addOnTabSelectedListener(tabListner)
+        binding.tabs.addOnTabSelectedListener(tabListener)
         binding.tabs.getTabAt(0)!!.select()
 
         toiletGrid()
@@ -92,54 +85,29 @@ class ListContainerFragment : Fragment() {
 
             val selectedText = parent?.getItemAtPosition(position).toString()
 
-            binding.ivInfoEmpty.visibility = GONE
+            // 카테고리별 리스트 비우기
+            categoryItemsToilet = mutableListOf()
+            categoryItemsTourist = mutableListOf()
+            categoryItemsParking = mutableListOf()
 
             if (selectedText == "전체") {
-                categoryItemsToilet = totalItemsToilet
-                categoryItemsTourist = totalItemsTourist
-                categoryItemsParking = totalItemsParking
-                return
+                categoryItemsToilet.addAll(totalItemsToilet)
+                categoryItemsTourist.addAll(totalItemsTourist)
+                categoryItemsParking.addAll(totalItemsParking)
             } else {
-                // 카테고리별 리스트 비우기
-                categoryItemsToilet = mutableListOf()
-                categoryItemsTourist = mutableListOf()
-                categoryItemsParking = mutableListOf()
-
                 // 화장실 - 지역 카테고리에 맞는 데이터 목록 추가
                 for (i in 0 until totalItemsToilet.size)
-                    if (totalItemsToilet[i].emdNm == selectedText) categoryItemsToilet.add(
-                        totalItemsToilet[i]
-                    )
+                    if (totalItemsToilet[i].emdNm == selectedText) categoryItemsToilet.add(totalItemsToilet[i])
 
                 // 관광지 - 지역 카테고리에 맞는 데이터 목록 추가
                 for (i in 0 until totalItemsTourist.size)
-                    if (totalItemsTourist[i].address.contains(selectedText)) categoryItemsTourist.add(
-                        totalItemsTourist[i]
-                    )
+                    if (totalItemsTourist[i].address.contains(selectedText)) categoryItemsTourist.add(totalItemsTourist[i])
 
                 // 주차장 - 지역 카테고리에 맞는 데이터 목록 추가
                 for (i in 0 until totalItemsParking.size)
-                    if (totalItemsParking[i].lnmAdres.contains(selectedText)) categoryItemsParking.add(
-                        totalItemsParking[i]
-                    )
+                    if (totalItemsParking[i].lnmAdres.contains(selectedText)) categoryItemsParking.add(totalItemsParking[i])
             }
-
-            if (categoryItemsToilet.isNotEmpty())
-                binding.recycler.adapter =
-                    ToiletRecyclerAdapter(requireContext(), categoryItemsToilet, true)
-            else binding.ivInfoEmpty.visibility = VISIBLE
-
-
-            if (categoryItemsTourist.isNotEmpty())
-                binding.recycler.adapter =
-                    TouristSpotRecyclerAdapter(requireContext(), categoryItemsTourist, true)
-            else binding.ivInfoEmpty.visibility = VISIBLE
-
-
-            if (categoryItemsParking.isNotEmpty())
-                binding.recycler.adapter =
-                    ParkingRecyclerAdapter(requireContext(), categoryItemsParking, true)
-            else binding.ivInfoEmpty.visibility = VISIBLE
+            checkStateAndType()
         }
 
         override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -148,7 +116,7 @@ class ListContainerFragment : Fragment() {
     }
 
 
-    private var tabListner = object : OnTabSelectedListener {
+    private var tabListener = object : OnTabSelectedListener {
 
         override fun onTabSelected(tab: TabLayout.Tab?) {
             checkStateAndType()
@@ -163,59 +131,84 @@ class ListContainerFragment : Fragment() {
 
     // 탭 상태, 뷰 타입 확인 후 조건에 맞는 데이터를 어댑터에 적용하는 함수
     fun checkStateAndType() {
-        when (recyclerTypecheckedId) {
+        binding.ivInfoEmpty.visibility = GONE
+        when (recyclerTypeCheckedId) {
             binding.radiobtnGrid.id -> {
                 recyclerState = RADIO_GRID
                 when (binding.tabs.selectedTabPosition) {
-                    0 -> toiletGrid()
-                    1 -> touristGrid()
-                    2 -> parkingGrid()
+                    0 -> {
+                        toiletGrid()
+                        if (categoryItemsToilet.isEmpty()) binding.ivInfoEmpty.visibility = VISIBLE
+                    }
+
+                    1 -> {
+                        touristGrid()
+                        if (categoryItemsTourist.isEmpty()) binding.ivInfoEmpty.visibility = VISIBLE
+                    }
+
+                    2 -> {
+                        parkingGrid()
+                        if (categoryItemsParking.isEmpty()) binding.ivInfoEmpty.visibility = VISIBLE
+                    }
                 }
             }
 
             binding.radiobtnLinear.id -> {
                 recyclerState = RADIO_LINEAR
                 when (binding.tabs.selectedTabPosition) {
-                    0 -> toiletLinear()
-                    1 -> touristLinear()
-                    2 -> parkingLinear()
+                    0 -> {
+                        toiletLinear()
+                        if (categoryItemsToilet.isEmpty()) binding.ivInfoEmpty.visibility = VISIBLE
+                    }
+
+                    1 -> {
+                        touristLinear()
+                        if (categoryItemsTourist.isEmpty()) binding.ivInfoEmpty.visibility =
+                            VISIBLE
+                    }
+
+                    2 -> {
+                        parkingLinear()
+                        if (categoryItemsParking.isEmpty()) binding.ivInfoEmpty.visibility =
+                            VISIBLE
+                    }
                 }
             }
         }
     }
 
     // 어댑터 교체 함수
-    fun toiletGrid() {
+    private fun toiletGrid() {
         binding.recycler.layoutManager = GridLayoutManager(context, 2)
         binding.recycler.adapter =
             ToiletRecyclerAdapter(requireContext(), categoryItemsToilet, true)
     }
 
-    fun toiletLinear() {
+    private fun toiletLinear() {
         binding.recycler.layoutManager = GridLayoutManager(context, 1)
         binding.recycler.adapter =
             ToiletRecyclerAdapter(requireContext(), categoryItemsToilet, false)
     }
 
-    fun touristGrid() {
+    private fun touristGrid() {
         binding.recycler.layoutManager = GridLayoutManager(context, 2)
         binding.recycler.adapter =
             TouristSpotRecyclerAdapter(requireContext(), categoryItemsTourist, true)
     }
 
-    fun touristLinear() {
+    private fun touristLinear() {
         binding.recycler.layoutManager = GridLayoutManager(context, 1)
         binding.recycler.adapter =
             TouristSpotRecyclerAdapter(requireContext(), categoryItemsTourist, false)
     }
 
-    fun parkingGrid() {
+    private fun parkingGrid() {
         binding.recycler.layoutManager = GridLayoutManager(context, 2)
         binding.recycler.adapter =
             ParkingRecyclerAdapter(requireContext(), categoryItemsParking, true)
     }
 
-    fun parkingLinear() {
+    private fun parkingLinear() {
         binding.recycler.layoutManager = GridLayoutManager(context, 1)
         binding.recycler.adapter =
             ParkingRecyclerAdapter(requireContext(), categoryItemsParking, false)
