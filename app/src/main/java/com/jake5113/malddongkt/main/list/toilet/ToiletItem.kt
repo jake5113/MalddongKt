@@ -32,7 +32,7 @@ data class Items(
 data class ToiletItem (
     var toiletNm: String, // 화장실 명
     var lnmAdres: String, // 지번주소
-    var photo: List<String>?, // 사진
+    var photo: MutableList<String>?, // 사진
 
     var laCrdnt: String = "-", // 위도
     var loCrdnt: String = "-", // 경도
@@ -63,7 +63,7 @@ data class ToiletItem (
     constructor(
         toiletNm: String,
         lnmAdres: String,
-        photo: List<String>?,
+        photo: MutableList<String>?,
     ) : this(toiletNm, lnmAdres, photo, "") {
         this.toiletNm = toiletNm
         this.lnmAdres = lnmAdres

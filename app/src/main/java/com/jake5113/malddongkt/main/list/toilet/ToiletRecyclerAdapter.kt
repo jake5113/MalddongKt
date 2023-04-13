@@ -39,6 +39,7 @@ class ToiletRecyclerAdapter(val context: Context, private val items: MutableList
             // TODO 좋아요 버튼 클릭시 이벤트 처리
         }
 
+        // 해당 아이템 클릭시 상세페이지에 데이터 전달 및 뷰 이동
         holder.itemView.setOnClickListener {
             val intent = Intent(context, ToiletDetailActivity::class.java)
             intent.putExtra("toiletItem", item as Serializable)

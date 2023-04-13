@@ -5,15 +5,34 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
+import com.jake5113.malddongkt.R
 import com.jake5113.malddongkt.databinding.ActivityToiletDetailBinding
+import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.CameraUpdate
+import com.naver.maps.map.MapFragment
+import com.naver.maps.map.NaverMap
+import com.naver.maps.map.OnMapReadyCallback
+import com.naver.maps.map.overlay.InfoWindow
+import com.naver.maps.map.overlay.Marker
 
-class ToiletDetailActivity : AppCompatActivity() {
-    lateinit var binding: ActivityToiletDetailBinding
+class ToiletDetailActivity : AppCompatActivity(), OnMapReadyCallback {
+    private lateinit var binding: ActivityToiletDetailBinding
+
+    lateinit var toiletNm:String
+    lateinit var latLng:LatLng
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityToiletDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val fm = supportFragmentManager
+        val mapFragment = fm.findFragmentById(R.id.detail_map) as MapFragment?
+            ?: MapFragment.newInstance().also {
+                fm.beginTransaction().add(R.id.detail_map, it).commit()
+            }
+
+        mapFragment.getMapAsync(this)
 
         val toiletItem = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getSerializableExtra("toiletItem", ToiletItem::class.java) as ToiletItem
@@ -21,7 +40,14 @@ class ToiletDetailActivity : AppCompatActivity() {
             intent.getSerializableExtra("toiletItem") as ToiletItem
         }
 
-        Glide.with(this).load(toiletItem.photo?.get(0) ?: "https://cdn.pixabay.com/photo/2020/03/27/17/03/shopping-4974313__340.jpg").into(binding.ivToilet)
+        toiletNm = toiletItem.toiletNm
+        latLng = LatLng(toiletItem.laCrdnt.toDouble(), toiletItem.loCrdnt.toDouble())
+
+        // 뷰페이저에서 아이템 3개를 미리 로드하도록 하는 명령
+        binding.vpToiletImg.offscreenPageLimit = 3
+        // 뷰페이저 어댑터 설정
+        binding.vpToiletImg.adapter = ToiletDetailViewPagerAdapter(this, toiletItem.photo)
+
         binding.toiletNm.text = toiletItem.toiletNm
         binding.rnAdres.text = toiletItem.rnAdres
         binding.lnmAdres.text = toiletItem.lnmAdres
@@ -38,6 +64,24 @@ class ToiletDetailActivity : AppCompatActivity() {
         binding.femaleClosetCnt.text = "여성 대변기 수 : ${toiletItem.femaleClosetCnt}"
         binding.femaleDspsnClosetCnt.text = "여성 장애인 대변기 수 : ${toiletItem.femaleDspsnClosetCnt}"
         binding.femaleChildClosetCnt.text = "여성 어린이 대변기 수 : ${toiletItem.femaleChildClosetCnt}"
+    }
 
+    override fun onMapReady(naverMap: NaverMap) {
+        // 마커 생성 안함.
+        //val marker = Marker()
+        //marker.map = null
+
+        // 줌 버튼 삭제
+        naverMap.uiSettings.isZoomControlEnabled = false
+
+        val infoWindow = InfoWindow()
+        val cameraUpdate = CameraUpdate.scrollTo(latLng)
+        infoWindow.position = latLng
+        infoWindow.adapter = object : InfoWindow.DefaultTextAdapter(this) {
+            override fun getText(infoWindow: InfoWindow): CharSequence = toiletNm
+        }
+        naverMap.moveCamera(cameraUpdate)
+        infoWindow.alpha = 0.8f
+        infoWindow.open(naverMap)
     }
 }

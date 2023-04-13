@@ -12,6 +12,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.GONE
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.android.material.tabs.TabLayout.VISIBLE
+import com.jake5113.malddongkt.R
 import com.jake5113.malddongkt.databinding.FragmentListContainerBinding
 import com.jake5113.malddongkt.main.list.parking.ParkingRecyclerAdapter
 import com.jake5113.malddongkt.main.list.parking.ParkingItem
@@ -54,12 +55,14 @@ class ListContainerFragment : Fragment() {
         recyclerTypeCheckedId = binding.radiobtnGrid.id
 
         // 스피너 설정
-        spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerItemsCategory)
+        spinnerAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, spinnerItemsCategory)
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
         binding.spinner.onItemSelectedListener = itemSelectedListener
         binding.spinner.adapter = spinnerAdapter
 
-        // spinner를 생성후
+        binding.spinner.dropDownVerticalOffset = 230
+
 
         // 검색창에 포커스 돼있지 않으면 닫기.
         binding.searchView.setOnQueryTextFocusChangeListener { v, hasFocus ->
@@ -115,7 +118,6 @@ class ListContainerFragment : Fragment() {
         }
     }
 
-
     private var tabListener = object : OnTabSelectedListener {
 
         override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -129,7 +131,7 @@ class ListContainerFragment : Fragment() {
         }
     }
 
-    // 탭 상태, 뷰 타입 확인 후 조건에 맞는 데이터를 어댑터에 적용하는 함수
+    // 탭 상태, 뷰 타입 확인 후 조건에 맞는 어댑터 설정 함수
     fun checkStateAndType() {
         binding.ivInfoEmpty.visibility = GONE
         when (recyclerTypeCheckedId) {
