@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.jake5113.malddongkt.R
 import com.jake5113.malddongkt.databinding.FragmentNaverMapBinding
+import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
+import com.naver.maps.map.overlay.Marker
 
 class NaverMapFragment : Fragment(), OnMapReadyCallback {
     lateinit var binding: FragmentNaverMapBinding
@@ -19,10 +21,10 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
     ): View? {
         binding = FragmentNaverMapBinding.inflate(inflater, container, false)
 
-        val fm = childFragmentManager
-        val mapFragment = fm.findFragmentById(R.id.navermap_container) as MapFragment?
+        val fragmentManager = childFragmentManager
+        val mapFragment = fragmentManager.findFragmentById(R.id.navermap_container) as MapFragment?
             ?: MapFragment.newInstance().also {
-                fm.beginTransaction().add(R.id.navermap_container, it).commit()
+                fragmentManager.beginTransaction().add(R.id.navermap_container, it).commit()
             }
 
         mapFragment.getMapAsync(this)
@@ -31,6 +33,8 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
     }
 
     override fun onMapReady(naverMap: NaverMap) {
-
+        val marker = Marker()
+        marker.position = LatLng(37.5667, 126.9783)
+        marker.map = naverMap
     }
 }

@@ -14,8 +14,10 @@ appcompat = "1.6.1"
 material = "1.8.0"
 constraintlayout = "2.1.4"
 retrofit = "2.9.0"
+viewpager2 = "1.0.0"
 
 [libraries]
+androidx-viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewpager2" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converter-gson" }
 converter-scalars = { module = "com.squareup.retrofit2:converter-scalars", version.ref = "converter-scalars" }
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }

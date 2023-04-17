@@ -38,23 +38,30 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_view, listContainerFragment).commit()
-        // TODO 리스트 계속 추가되는거 확인하기
-        binding.bottomNavigation.setOnItemSelectedListener {
-            val transaction = supportFragmentManager.beginTransaction()
-            when (it.itemId) {
-                R.id.item_list -> transaction.replace(R.id.fragment_container_view, listContainerFragment)
-                R.id.item_map -> transaction.replace(R.id.fragment_container_view, naverMapFragment)
-                R.id.item_mypage -> transaction.replace(R.id.fragment_container_view, mypageFragment)
-            }
-            transaction.commit()
-            true
-        }
         getToiletItems()
         getTouristSpotItems()
         getParkingItems()
 
+        // 리스트 프래그먼트 열기
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container_view, listContainerFragment).commit()
+        binding.bottomNavigation.setOnItemSelectedListener {
+            val transaction = supportFragmentManager.beginTransaction()
+            when (it.itemId) {
+                R.id.item_list -> transaction.replace(
+                    R.id.fragment_container_view,
+                    listContainerFragment
+                )
+
+                R.id.item_map -> transaction.replace(R.id.fragment_container_view, naverMapFragment)
+                R.id.item_mypage -> transaction.replace(
+                    R.id.fragment_container_view,
+                    mypageFragment
+                )
+            }
+            transaction.commit()
+            true
+        }
     }
 
     private fun getToiletItems() {
@@ -71,13 +78,15 @@ class MainActivity : AppCompatActivity() {
                     listContainerFragment.totalItemsToilet.addAll(toiletItemList)
 
                     val hashSet = hashSetOf<String>()
-                    for (i in 0 until listContainerFragment.totalItemsToilet.size)
+                    for (i in 0 until toiletItemList.size) {
                         hashSet.add(toiletItemList[i].emdNm)
+                    }
+
                     spinnerCategory.addAll(hashSet)
                     spinnerCategory.sort()
                     spinnerCategory.add(0, "전체")
                     listContainerFragment.spinnerItemsCategory.addAll(spinnerCategory)
-                    listContainerFragment.adapter.notifyDataSetChanged()
+                    listContainerFragment.spinnerAdapter.notifyDataSetChanged()
 
                     listContainerFragment.binding.recycler.adapter!!.notifyDataSetChanged()
                 }

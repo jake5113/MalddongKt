@@ -1,5 +1,9 @@
 package com.jake5113.malddongkt.main.list.toilet
 
+import android.os.Parcel
+import android.os.Parcelable
+import java.io.Serializable
+
 data class ToiletResponse(
     var response: Response
 )
@@ -25,13 +29,13 @@ data class Items(
     var item: MutableList<ToiletItem>
 )
 
-data class ToiletItem(
+data class ToiletItem (
     var toiletNm: String, // 화장실 명
     var lnmAdres: String, // 지번주소
-    var photo: List<String>?, // 사진
+    var photo: MutableList<String>?, // 사진
 
-    var loCrdnt: String = "-", // 위도
-    var laCrdnt: String = "-", // 경도
+    var laCrdnt: String = "-", // 위도
+    var loCrdnt: String = "-", // 경도
     var emdNm: String = "-", //읍면동명
     var rnAdres: String = "-", // 도로명주소
 
@@ -55,11 +59,11 @@ data class ToiletItem(
     var femaleClosetCnt: String = "-", // 여성 대변기 수
     var femaleChildClosetCnt: String = "-", // 여성 장애인 대변기 수
     var femaleDspsnClosetCnt: String = "-", // 여성 어린이 대변기 수
-) {
+) : Serializable {
     constructor(
         toiletNm: String,
         lnmAdres: String,
-        photo: List<String>?,
+        photo: MutableList<String>?,
     ) : this(toiletNm, lnmAdres, photo, "") {
         this.toiletNm = toiletNm
         this.lnmAdres = lnmAdres

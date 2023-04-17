@@ -1,151 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="4"
-    tools:context=".main.mypage.MypageFragment">
+    android:layout_margin="4dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:title="@string/app_name">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".main.mypage.MypageFragment">
 
-        <ImageButton
-            android:id="@+id/ic_settings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:adjustViewBounds="true"
-            android:backgroundTint="#00000000"
-            android:src="@drawable/baseline_settings_24" />
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="@string/app_name">
 
-    </androidx.appcompat.widget.Toolbar>
+            <ImageButton
+                android:id="@+id/ic_settings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:adjustViewBounds="true"
+                android:backgroundTint="#00000000"
+                android:src="@drawable/baseline_settings_24" />
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        </androidx.appcompat.widget.Toolbar>
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/civ_profile"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:src="@drawable/malddong"
+                    app:civ_border_overlay="true"
+                    app:civ_border_width="1dp" />
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/civ_profile"
+                    android:layout_toEndOf="@id/civ_profile"
+                    android:text="name"
+                    android:textSize="32sp" />
+
+            </RelativeLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/civ_profile"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
+            <TextView
+                android:id="@+id/tv_toilet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                android:src="@drawable/malddong"
-                app:civ_border_overlay="true"
-                app:civ_border_width="1dp" />
+                android:padding="4dp"
+                android:text="화장실"
+                android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/tv_name"
-                android:layout_width="wrap_content"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_fav_toilet"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@id/civ_profile"
-                android:layout_toEndOf="@id/civ_profile"
-                android:text="name"
-                android:textSize="32sp" />
+                android:layout_below="@id/tv_toilet"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         </RelativeLayout>
-    </com.google.android.material.appbar.AppBarLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tv_toilet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:padding="4dp"
-            android:text="화장실"
-            android:textSize="16sp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_below="@id/tv_toilet"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-        <ImageView
-            android:id="@+id/iv_no_list_toilet"
-            android:src="@drawable/malddong"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tv_tourist"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:padding="4dp"
-            android:text="관광지"
-            android:textSize="16sp" />
+            android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_below="@id/tv_tourist"
+            <TextView
+                android:id="@+id/tv_tourist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:padding="4dp"
+                android:text="관광지"
+                android:textSize="16sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_tourist"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-        <ImageView
-            android:id="@+id/iv_no_list_tourist"
-            android:src="@drawable/malddong"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tv_parking"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:padding="4dp"
-            android:text="주차장"
-            android:textSize="16sp" />
+            android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_below="@id/tv_parking"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            <TextView
+                android:id="@+id/tv_parking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:padding="4dp"
+                android:text="주차장"
+                android:textSize="16sp" />
 
-        <ImageView
-            android:id="@+id/iv_no_list_parking"
-            android:src="@drawable/malddong"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </RelativeLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_parking"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 
-</LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+</ScrollView>
