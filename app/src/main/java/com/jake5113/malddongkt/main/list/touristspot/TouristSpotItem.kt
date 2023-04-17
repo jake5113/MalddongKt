@@ -1,5 +1,7 @@
 package com.jake5113.malddongkt.main.list.touristspot
 
+import java.io.Serializable
+
 data class TouristResponse(
     var info: MutableList<TouristSpotItem>,
     var info_cnt: Int,
@@ -19,7 +21,7 @@ data class TouristSpotItem(
     var road_address: String = "-", // 도로명 주소
     var tag: String = "-", //태그
     var thumbnail_path: String = "-", // 	썸네일 이미지
-) {
+): Serializable {
     constructor(title: String, introduction: String, img_path: String) : this(title, introduction, img_path,"") {
         this.title = title
         this.introduction = introduction

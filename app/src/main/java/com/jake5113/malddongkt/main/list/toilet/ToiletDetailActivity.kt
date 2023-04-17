@@ -5,7 +5,6 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import com.bumptech.glide.Glide
 import com.jake5113.malddongkt.R
 import com.jake5113.malddongkt.databinding.ActivityToiletDetailBinding
 import com.naver.maps.geometry.LatLng
@@ -14,7 +13,6 @@ import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.InfoWindow
-import com.naver.maps.map.overlay.Marker
 
 class ToiletDetailActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: ActivityToiletDetailBinding
