@@ -8,6 +8,7 @@
     tools:context=".main.map.NaverMapFragment">
 
     <FrameLayout
+        android:layout_below="@id/appbar_map"
         android:id="@+id/navermap_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -35,11 +36,12 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/appbar_map"
-        android:layout_marginTop="8dp"
-        android:weightSum="3">
+        android:padding="8dp"
+        android:layout_marginHorizontal="30dp"
+        >
 
         <ToggleButton
             android:id="@+id/tab_toilet"

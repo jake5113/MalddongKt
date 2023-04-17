@@ -43,13 +43,21 @@ class MainActivity : AppCompatActivity() {
         getParkingItems()
 
         // 리스트 프래그먼트 열기
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container_view, listContainerFragment).commit()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container_view, listContainerFragment).commit()
         binding.bottomNavigation.setOnItemSelectedListener {
             val transaction = supportFragmentManager.beginTransaction()
             when (it.itemId) {
-                R.id.item_list -> transaction.replace(R.id.fragment_container_view, listContainerFragment)
+                R.id.item_list -> transaction.replace(
+                    R.id.fragment_container_view,
+                    listContainerFragment
+                )
+
                 R.id.item_map -> transaction.replace(R.id.fragment_container_view, naverMapFragment)
-                R.id.item_mypage -> transaction.replace(R.id.fragment_container_view, mypageFragment)
+                R.id.item_mypage -> transaction.replace(
+                    R.id.fragment_container_view,
+                    mypageFragment
+                )
             }
             transaction.commit()
             true
@@ -70,8 +78,10 @@ class MainActivity : AppCompatActivity() {
                     listContainerFragment.totalItemsToilet.addAll(toiletItemList)
 
                     val hashSet = hashSetOf<String>()
-                    for (i in 0 until listContainerFragment.totalItemsToilet.size)
+                    for (i in 0 until toiletItemList.size) {
                         hashSet.add(toiletItemList[i].emdNm)
+                    }
+
                     spinnerCategory.addAll(hashSet)
                     spinnerCategory.sort()
                     spinnerCategory.add(0, "전체")
