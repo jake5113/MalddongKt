@@ -13,6 +13,8 @@ data class TouristSpotItem(
     var introduction: String = "-", // 소개
     var img_path: String, // 일반 이미지
 
+    var isFavorite: Boolean = false, // 좋아요 유무
+
     var address: String, //	주소
     var latitude: String = "-", // 위도
     var longitude: String = "-", // 경도
@@ -21,10 +23,13 @@ data class TouristSpotItem(
     var road_address: String = "-", // 도로명 주소
     var tag: String = "-", //태그
     var thumbnail_path: String = "-", // 	썸네일 이미지
-): Serializable {
-    constructor(title: String, introduction: String, img_path: String) : this(title, introduction, img_path,"") {
+) : Serializable {
+    constructor(title: String, introduction: String, img_path: String, isFavorite: Boolean) : this(
+        title, introduction, img_path, isFavorite, ""
+    ) {
         this.title = title
         this.introduction = introduction
         this.img_path = img_path
+        this.isFavorite = isFavorite
     }
 }

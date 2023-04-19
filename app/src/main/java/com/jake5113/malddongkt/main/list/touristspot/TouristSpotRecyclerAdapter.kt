@@ -30,6 +30,7 @@ class TouristSpotRecyclerAdapter(val context: Context, private val items: Mutabl
         holder.tvName.text = item.title
         holder.tvAddress.text = item.introduction
         holder.tvDistance.text = "15m"
+        holder.btnFavorite.isChecked = item.isFavorite
 
         // 해당 아이템 클릭시 상세페이지에 데이터 전달 및 뷰 이동
         holder.itemView.setOnClickListener {

@@ -23,9 +23,6 @@ class MypageFragment : Fragment() {
     ): View? {
         binding = FragmentMypageBinding.inflate(inflater, container, false)
 
-        // 이 부분 수정하기 - 테스트중 favorite
-        //binding.recyclerFavToilet.adapter = TouristSpotRecyclerAdapter(requireContext(), list, false)
-
 
 
         return binding.root

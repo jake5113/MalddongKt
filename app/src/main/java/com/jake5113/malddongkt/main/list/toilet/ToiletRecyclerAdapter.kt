@@ -1,6 +1,7 @@
 package com.jake5113.malddongkt.main.list.toilet
 
 import android.content.Context
+import android.content.DialogInterface.OnClickListener
 import android.content.Intent
 import android.location.Location
 import android.location.LocationManager
@@ -52,9 +53,10 @@ class ToiletRecyclerAdapter(
                 "m"
             }
 
+        // 좋아요 선택되어있는 경우에만 체크표시
+        holder.btnFavorite.isChecked = item.isFavorite
+        holder.btnFavorite.setOnClickListener {
 
-        if (holder.btnFavorite.isSelected) {
-            // TODO 좋아요 버튼 클릭시 이벤트 처리
         }
 
         // 해당 아이템 클릭시 상세페이지에 데이터 전달 및 뷰 이동
@@ -63,7 +65,6 @@ class ToiletRecyclerAdapter(
             intent.putExtra("toiletItem", item as Serializable)
             context.startActivity(intent)
         }
-
     }
 }
 

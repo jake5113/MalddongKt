@@ -34,6 +34,8 @@ data class ToiletItem (
     var lnmAdres: String, // 지번주소
     var photo: MutableList<String>?, // 사진
 
+    var isFavorite: Boolean = false, // 좋아요 유무
+
     var laCrdnt: String = "-", // 위도
     var loCrdnt: String = "-", // 경도
     var emdNm: String = "-", //읍면동명
@@ -61,12 +63,11 @@ data class ToiletItem (
     var femaleDspsnClosetCnt: String = "-", // 여성 어린이 대변기 수
 ) : Serializable {
     constructor(
-        toiletNm: String,
-        lnmAdres: String,
-        photo: MutableList<String>?,
-    ) : this(toiletNm, lnmAdres, photo, "") {
+        toiletNm: String, lnmAdres: String, photo: MutableList<String>?, isFavorite: Boolean
+    ) : this(toiletNm, lnmAdres, photo, isFavorite, "") {
         this.toiletNm = toiletNm
         this.lnmAdres = lnmAdres
         this.photo = photo
+        this.isFavorite = isFavorite
     }
 }
