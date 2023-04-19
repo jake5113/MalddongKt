@@ -76,4 +76,8 @@ dependencies {
 
     // 네이버 지도 SDK
     implementation (libs.map.sdk)
+
+    // Google Fused Location API
+    implementation(libs.play.services.location)
+
 }
