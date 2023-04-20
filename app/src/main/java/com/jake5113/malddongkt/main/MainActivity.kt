@@ -85,9 +85,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    val permissionLauncher: ActivityResultLauncher<String> =
+
+    private val permissionLauncher: ActivityResultLauncher<String> =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) {
-            if (it!!) requestMyLocation()
+            if (it) requestMyLocation()
             else Toast.makeText(this, "위치정보 제공에 동의하지 않았습니다.", Toast.LENGTH_SHORT).show()
         }
 
@@ -99,6 +100,7 @@ class MainActivity : AppCompatActivity() {
             && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return
         }
+
         providerClient.requestLocationUpdates(request, locationCallback, Looper.getMainLooper())
     }
 

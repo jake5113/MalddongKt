@@ -23,8 +23,6 @@ class MypageFragment : Fragment() {
     ): View? {
         binding = FragmentMypageBinding.inflate(inflater, container, false)
 
-
-
         return binding.root
     }
 }
