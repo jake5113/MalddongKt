@@ -60,16 +60,16 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        getToiletItems()
-        getTouristSpotItems()
-        getParkingItems()
-
         // 내 위치 정보 제공 동적 퍼미션 요청
         if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED) {
             permissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         } else {
             requestMyLocation()
         }
+
+        getToiletItems()
+        getTouristSpotItems()
+        getParkingItems()
 
         // 리스트 프래그먼트 열기
         supportFragmentManager.beginTransaction()

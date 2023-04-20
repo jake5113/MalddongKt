@@ -86,8 +86,6 @@ class ListContainerFragment : Fragment() {
             (activity as MainActivity).getTouristSpotItems()
             (activity as MainActivity).getParkingItems()
 
-            binding.recycler.adapter?.notifyDataSetChanged()
-
             checkStateAndType()
             binding.swipe.isRefreshing = false
         }
@@ -106,17 +104,12 @@ class ListContainerFragment : Fragment() {
             categoryItemsParking = mutableListOf()
 
             if (selectedText == "전체") {
-                // todo 더 공부가 필요함.!!
-                /*               categoryItemsToilet = totalItemsToilet
-                               categoryItemsTourist = totalItemsTourist
-                               categoryItemsParking = totalItemsParking*/
-
-                categoryItemsToilet.addAll(totalItemsToilet)
-                categoryItemsTourist.addAll(totalItemsTourist)
-                categoryItemsParking.addAll(totalItemsParking)
+                categoryItemsToilet = totalItemsToilet
+                categoryItemsTourist = totalItemsTourist
+                categoryItemsParking = totalItemsParking
             } else {
                 // 화장실 - 지역 카테고리에 맞는 데이터 목록 추가
-                totalItemsToilet.forEach{
+                totalItemsToilet.forEach {
                     if (it.emdNm == selectedText) categoryItemsToilet.add(it)
                 }
 
