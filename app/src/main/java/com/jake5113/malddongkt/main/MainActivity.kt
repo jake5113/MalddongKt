@@ -48,7 +48,8 @@ class MainActivity : AppCompatActivity() {
     var spinnerCategory = mutableListOf<String>()
 
     // 현재 내 위치
-    var myLocation:Location? = null
+    var myLocation: Location? = null
+
     // Google Fused Location API
     val providerClient: FusedLocationProviderClient by lazy {
         LocationServices.getFusedLocationProviderClient(this)
@@ -64,21 +65,29 @@ class MainActivity : AppCompatActivity() {
         getParkingItems()
 
         // 내 위치 정보 제공 동적 퍼미션 요청
-        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED){
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED) {
             permissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         } else {
             requestMyLocation()
         }
 
         // 리스트 프래그먼트 열기
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container_view, listContainerFragment).commit()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container_view, listContainerFragment).commit()
 
         binding.bottomNavigation.setOnItemSelectedListener {
             val transaction = supportFragmentManager.beginTransaction()
             when (it.itemId) {
-                R.id.item_list -> transaction.replace(R.id.fragment_container_view, listContainerFragment)
+                R.id.item_list -> transaction.replace(
+                    R.id.fragment_container_view,
+                    listContainerFragment
+                )
+
                 R.id.item_map -> transaction.replace(R.id.fragment_container_view, naverMapFragment)
-                R.id.item_mypage -> transaction.replace(R.id.fragment_container_view, mypageFragment)
+                R.id.item_mypage -> transaction.replace(
+                    R.id.fragment_container_view,
+                    mypageFragment
+                )
             }
             transaction.commit()
             true
@@ -92,12 +101,19 @@ class MainActivity : AppCompatActivity() {
             else Toast.makeText(this, "위치정보 제공에 동의하지 않았습니다.", Toast.LENGTH_SHORT).show()
         }
 
-    fun requestMyLocation(){
-        val request : LocationRequest =
+    fun requestMyLocation() {
+        val request: LocationRequest =
             LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 1000).build()
 
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-            && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+            && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             return
         }
 
@@ -105,11 +121,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     // 위치검색 결과 콜백객체
-    private val locationCallback : LocationCallback = object : LocationCallback(){
-        override fun onLocationResult(p0: LocationResult) {
-            super.onLocationResult(p0)
+    private val locationCallback: LocationCallback = object : LocationCallback() {
+        override fun onLocationResult(locationResult: LocationResult) {
+            super.onLocationResult(locationResult)
 
-            myLocation = p0.lastLocation
+            myLocation = locationResult.lastLocation
 
             providerClient.removeLocationUpdates(this)
 
@@ -117,7 +133,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getToiletItems() {
+    fun getToiletItems() {
         val retrofit = RetrofitHelper.getRetrofitInstance("https://apis.data.go.kr/")
         val retrofitApiService = retrofit.create(RetrofitApiService::class.java)
         retrofitApiService.getToiletItems(1, 500).enqueue(
@@ -128,20 +144,23 @@ class MainActivity : AppCompatActivity() {
                 ) {
                     toiletResponse = response.body()
                     val toiletItemList = toiletResponse?.response?.body?.items?.item!!
-                    listContainerFragment.totalItemsToilet.addAll(toiletItemList)
+                    if (listContainerFragment.totalItemsToilet.isEmpty())
+                        listContainerFragment.totalItemsToilet.addAll(toiletItemList)
 
-                    val hashSet = hashSetOf<String>()
-                    for (i in 0 until toiletItemList.size) {
-                        hashSet.add(toiletItemList[i].emdNm)
+                    if (spinnerCategory.isEmpty()) {
+                        val hashSet = hashSetOf<String>()
+                        for (i in 0 until toiletItemList.size) {
+                            hashSet.add(toiletItemList[i].emdNm)
+                        }
+
+                        spinnerCategory.addAll(hashSet)
+                        spinnerCategory.sort()
+                        spinnerCategory.add(0, "전체")
+                        listContainerFragment.spinnerItemsCategory.addAll(spinnerCategory)
+                        listContainerFragment.spinnerAdapter.notifyDataSetChanged()
                     }
 
-                    spinnerCategory.addAll(hashSet)
-                    spinnerCategory.sort()
-                    spinnerCategory.add(0, "전체")
-                    listContainerFragment.spinnerItemsCategory.addAll(spinnerCategory)
-                    listContainerFragment.spinnerAdapter.notifyDataSetChanged()
-
-                    listContainerFragment.binding.recycler.adapter?.notifyItemInserted(0)
+                    listContainerFragment.binding.recycler.adapter?.notifyDataSetChanged()
                 }
 
                 override fun onFailure(call: Call<ToiletResponse>, t: Throwable) {
@@ -150,7 +169,7 @@ class MainActivity : AppCompatActivity() {
             })
     }
 
-    private fun getTouristSpotItems() {
+    fun getTouristSpotItems() {
         val retrofit = RetrofitHelper.getRetrofitInstance("http://api.jejuits.go.kr/")
         val retrofitApiService = retrofit.create(RetrofitApiService::class.java)
         retrofitApiService.getTouristItems().enqueue(object : Callback<TouristResponse> {
@@ -159,7 +178,8 @@ class MainActivity : AppCompatActivity() {
                 response: Response<TouristResponse>
             ) {
                 touristResponse = response.body()
-                listContainerFragment.totalItemsTourist.addAll(touristResponse?.info!!)
+                if (listContainerFragment.totalItemsTourist.isEmpty())
+                    listContainerFragment.totalItemsTourist.addAll(touristResponse?.info!!)
                 listContainerFragment.binding.recycler.adapter?.notifyDataSetChanged()
             }
 
@@ -167,7 +187,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun getParkingItems() {
+    fun getParkingItems() {
         val retrofit = RetrofitHelper.getRetrofitInstance("https://api.odcloud.kr/api/")
         val retrofitApiService = retrofit.create(RetrofitApiService::class.java)
         retrofitApiService.getParkingItems().enqueue(object : Callback<ParkingResponse> {
@@ -176,7 +196,8 @@ class MainActivity : AppCompatActivity() {
                 response: Response<ParkingResponse>
             ) {
                 parkingResponse = response.body()
-                listContainerFragment.totalItemsParking.addAll(parkingResponse?.data!!)
+                if (listContainerFragment.totalItemsParking.isEmpty())
+                    listContainerFragment.totalItemsParking.addAll(parkingResponse?.data!!)
                 listContainerFragment.binding.recycler.adapter?.notifyDataSetChanged()
             }
 

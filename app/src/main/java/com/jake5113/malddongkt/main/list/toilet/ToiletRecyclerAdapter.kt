@@ -1,5 +1,6 @@
 package com.jake5113.malddongkt.main.list.toilet
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.DialogInterface.OnClickListener
 import android.content.Intent
@@ -24,6 +25,7 @@ class ToiletRecyclerAdapter(
     private val sizeShort: Boolean
 ) :
     Adapter<VH>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         val itemShortView: View =
             LayoutInflater.from(context).inflate(R.layout.item_short_recycler, parent, false)
@@ -34,6 +36,7 @@ class ToiletRecyclerAdapter(
 
     override fun getItemCount(): Int = items.size
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: VH, position: Int) {
 
         val item = items[position]
@@ -50,7 +53,7 @@ class ToiletRecyclerAdapter(
                     longitude = item.loCrdnt.toDouble()
                 })?.toInt().toString() + "m"
             } catch (e: Exception) {
-                "m"
+                ""
             }
 
         // 좋아요 선택되어있는 경우에만 체크표시

@@ -1,7 +1,10 @@
 package com.jake5113.malddongkt.main.list.parking
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.location.Location
+import android.location.LocationManager
 import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +12,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.bumptech.glide.Glide
 import com.jake5113.malddongkt.R
+import com.jake5113.malddongkt.main.MainActivity
 import com.jake5113.malddongkt.main.list.toilet.VH
 
 
@@ -28,6 +32,7 @@ class ParkingRecyclerAdapter(
 
     override fun getItemCount(): Int = items.size
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: VH, position: Int) {
         val item = items[position]
 
@@ -36,10 +41,19 @@ class ParkingRecyclerAdapter(
             .into(holder.ivImg)
         holder.tvName.text = item.name
         holder.tvAddress.text = item.lnmAdres
-        holder.tvDistance.text = "15m"
+        holder.tvDistance.text =
+            try {
+                (context as MainActivity).myLocation?.distanceTo(
+                    Location(LocationManager.GPS_PROVIDER).apply {
+                        latitude = item.latitude.toDouble()
+                        longitude = item.longitude.toDouble()
+                    })?.toInt().toString() + "m"
+            } catch (e: Exception) {
+                ""
+            }
         holder.btnFavorite.isChecked = item.isFavorite
 
-        holder.btnFavorite.setOnClickListener{
+        holder.btnFavorite.setOnClickListener {
 
         }
 
