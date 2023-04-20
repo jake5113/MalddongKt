@@ -94,7 +94,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     private val permissionLauncher: ActivityResultLauncher<String> =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) {
             if (it) requestMyLocation()
@@ -159,7 +158,6 @@ class MainActivity : AppCompatActivity() {
                         listContainerFragment.spinnerItemsCategory.addAll(spinnerCategory)
                         listContainerFragment.spinnerAdapter.notifyDataSetChanged()
                     }
-
                     listContainerFragment.binding.recycler.adapter?.notifyDataSetChanged()
                 }
 
