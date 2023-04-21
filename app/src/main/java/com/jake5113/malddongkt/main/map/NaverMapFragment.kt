@@ -24,6 +24,7 @@ import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.InfoWindow
 import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.overlay.Overlay.OnClickListener
 import com.naver.maps.map.util.MarkerIcons
 import ted.gun0912.clustering.naver.TedNaverClustering
@@ -73,6 +74,20 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
         myMarker.icon = MarkerIcons.RED
         myMarker.map = naverMap
 
+        val toiletMarkerInfoWindow = InfoWindow()
+        val touristMarkerInfoWindow = InfoWindow()
+        val parkingMarkerInfoWindow = InfoWindow()
+
+        fun closeInfoWindow() {
+            toiletMarkerInfoWindow.close()
+            touristMarkerInfoWindow.close()
+            parkingMarkerInfoWindow.close()
+        }
+
+        naverMap.setOnMapClickListener { pointF, latLng ->
+            closeInfoWindow()
+        }
+
         TedNaverClustering.with<ToiletItem>(requireContext(), naverMap)
             .items(totalItemsToilet)
             .customMarker {
@@ -85,8 +100,9 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
                 }
             }
             .markerClickListener {
+                closeInfoWindow()
                 markerToiletItem = it
-                InfoWindow().apply {
+                toiletMarkerInfoWindow.apply {
                     position = LatLng(it.laCrdnt.toDouble(), it.loCrdnt.toDouble())
                     adapter = object : InfoWindow.DefaultTextAdapter(requireContext()) {
                         override fun getText(infoWindow: InfoWindow): CharSequence = it.toiletNm
@@ -115,8 +131,9 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
                 }
             }
             .markerClickListener {
+                closeInfoWindow()
                 markerTouristItem = it
-                InfoWindow().apply {
+                touristMarkerInfoWindow.apply {
                     position = LatLng(it.latitude.toDouble(), it.longitude.toDouble())
                     adapter = object : InfoWindow.DefaultTextAdapter(requireContext()) {
                         override fun getText(infoWindow: InfoWindow): CharSequence = it.title
@@ -145,8 +162,9 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
                 }
             }
             .markerClickListener {
+                closeInfoWindow()
                 markerParkingItem = it
-                InfoWindow().apply {
+                parkingMarkerInfoWindow.apply {
                     position = LatLng(it.latitude.toDouble(), it.longitude.toDouble())
                     adapter = object : InfoWindow.DefaultTextAdapter(requireContext()) {
                         override fun getText(infoWindow: InfoWindow): CharSequence = it.name
