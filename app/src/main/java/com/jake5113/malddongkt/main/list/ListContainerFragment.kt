@@ -14,6 +14,7 @@ import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.android.material.tabs.TabLayout.VISIBLE
 import com.jake5113.malddongkt.R
 import com.jake5113.malddongkt.databinding.FragmentListContainerBinding
+import com.jake5113.malddongkt.main.MainActivity
 import com.jake5113.malddongkt.main.list.parking.ParkingRecyclerAdapter
 import com.jake5113.malddongkt.main.list.parking.ParkingItem
 import com.jake5113.malddongkt.main.list.toilet.ToiletItem
@@ -78,11 +79,20 @@ class ListContainerFragment : Fragment() {
         binding.tabs.addOnTabSelectedListener(tabListener)
         binding.tabs.getTabAt(0)!!.select()
 
-        toiletGrid()
+        // swipe refresh
+        binding.swipe.setOnRefreshListener {
+            // 인터넷 접속
+            (activity as MainActivity).getToiletItems()
+            (activity as MainActivity).getTouristSpotItems()
+            (activity as MainActivity).getParkingItems()
 
+            checkStateAndType()
+            binding.swipe.isRefreshing = false
+        }
         return binding.root
     }///////////////////////////////onCreateView()////////////////////////////////////////////
 
+    // spinner item 리스너
     private val itemSelectedListener = object : AdapterView.OnItemSelectedListener {
         override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
@@ -94,27 +104,30 @@ class ListContainerFragment : Fragment() {
             categoryItemsParking = mutableListOf()
 
             if (selectedText == "전체") {
-                categoryItemsToilet.addAll(totalItemsToilet)
-                categoryItemsTourist.addAll(totalItemsTourist)
-                categoryItemsParking.addAll(totalItemsParking)
+                categoryItemsToilet = totalItemsToilet
+                categoryItemsTourist = totalItemsTourist
+                categoryItemsParking = totalItemsParking
             } else {
                 // 화장실 - 지역 카테고리에 맞는 데이터 목록 추가
-                for (i in 0 until totalItemsToilet.size)
-                    if (totalItemsToilet[i].emdNm == selectedText) categoryItemsToilet.add(totalItemsToilet[i])
+                totalItemsToilet.forEach {
+                    if (it.emdNm == selectedText) categoryItemsToilet.add(it)
+                }
 
                 // 관광지 - 지역 카테고리에 맞는 데이터 목록 추가
-                for (i in 0 until totalItemsTourist.size)
-                    if (totalItemsTourist[i].address.contains(selectedText)) categoryItemsTourist.add(totalItemsTourist[i])
-
+                totalItemsTourist.forEach {
+                    if (it.address.contains(selectedText)) categoryItemsTourist.add(it)
+                }
                 // 주차장 - 지역 카테고리에 맞는 데이터 목록 추가
-                for (i in 0 until totalItemsParking.size)
-                    if (totalItemsParking[i].lnmAdres.contains(selectedText)) categoryItemsParking.add(totalItemsParking[i])
+                totalItemsParking.forEach {
+                    if (it.lnmAdres.contains(selectedText)) categoryItemsParking.add(it)
+                }
             }
             checkStateAndType()
         }
 
         override fun onNothingSelected(parent: AdapterView<*>?) {
             binding.spinner.setSelection(0)
+            checkStateAndType()
         }
     }
 
@@ -165,14 +178,12 @@ class ListContainerFragment : Fragment() {
 
                     1 -> {
                         touristLinear()
-                        if (categoryItemsTourist.isEmpty()) binding.ivInfoEmpty.visibility =
-                            VISIBLE
+                        if (categoryItemsTourist.isEmpty()) binding.ivInfoEmpty.visibility = VISIBLE
                     }
 
                     2 -> {
                         parkingLinear()
-                        if (categoryItemsParking.isEmpty()) binding.ivInfoEmpty.visibility =
-                            VISIBLE
+                        if (categoryItemsParking.isEmpty()) binding.ivInfoEmpty.visibility = VISIBLE
                     }
                 }
             }
