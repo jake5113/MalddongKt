@@ -146,6 +146,9 @@ class MainActivity : AppCompatActivity() {
                     if (listContainerFragment.totalItemsToilet.isEmpty())
                         listContainerFragment.totalItemsToilet.addAll(toiletItemList)
 
+                    if(naverMapFragment.totalItemsToilet.isEmpty())
+                        naverMapFragment.totalItemsToilet.addAll(toiletItemList)
+
                     if (spinnerCategory.isEmpty()) {
                         val hashSet = hashSetOf<String>()
                         for (i in 0 until toiletItemList.size) {
@@ -178,6 +181,10 @@ class MainActivity : AppCompatActivity() {
                 touristResponse = response.body()
                 if (listContainerFragment.totalItemsTourist.isEmpty())
                     listContainerFragment.totalItemsTourist.addAll(touristResponse?.info!!)
+
+                if(naverMapFragment.totalItemsTourist.isEmpty())
+                    naverMapFragment.totalItemsTourist.addAll(touristResponse?.info!!)
+
                 listContainerFragment.binding.recycler.adapter?.notifyDataSetChanged()
             }
 
@@ -196,6 +203,10 @@ class MainActivity : AppCompatActivity() {
                 parkingResponse = response.body()
                 if (listContainerFragment.totalItemsParking.isEmpty())
                     listContainerFragment.totalItemsParking.addAll(parkingResponse?.data!!)
+
+                if(naverMapFragment.totalItemsParking.isEmpty())
+                    naverMapFragment.totalItemsParking.addAll(parkingResponse?.data!!)
+
                 listContainerFragment.binding.recycler.adapter?.notifyDataSetChanged()
             }
 

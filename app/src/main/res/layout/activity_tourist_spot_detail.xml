@@ -25,6 +25,7 @@
         app:cardCornerRadius="8dp">
 
         <ImageView
+            android:scaleType="centerCrop"
             android:id="@+id/iv_tourist_img"
             android:layout_width="match_parent"
             android:layout_height="230dp"
