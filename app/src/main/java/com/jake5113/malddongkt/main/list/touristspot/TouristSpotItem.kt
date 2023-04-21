@@ -1,5 +1,7 @@
 package com.jake5113.malddongkt.main.list.touristspot
 
+import ted.gun0912.clustering.clustering.TedClusterItem
+import ted.gun0912.clustering.geometry.TedLatLng
 import java.io.Serializable
 
 data class TouristResponse(
@@ -23,7 +25,7 @@ data class TouristSpotItem(
     var road_address: String = "-", // 도로명 주소
     var tag: String = "-", //태그
     var thumbnail_path: String = "-", // 	썸네일 이미지
-) : Serializable {
+) : Serializable, TedClusterItem {
     constructor(title: String, introduction: String, img_path: String, isFavorite: Boolean) : this(
         title, introduction, img_path, isFavorite, ""
     ) {
@@ -32,4 +34,6 @@ data class TouristSpotItem(
         this.img_path = img_path
         this.isFavorite = isFavorite
     }
+
+    override fun getTedLatLng(): TedLatLng = TedLatLng(latitude.toDouble(), longitude.toDouble())
 }

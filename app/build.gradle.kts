@@ -76,6 +76,8 @@ dependencies {
 
     // 네이버 지도 SDK
     implementation (libs.map.sdk)
+    // 마커 클러스터링
+    implementation(libs.tedclustering.naver)
 
     // Google Fused Location API
     implementation(libs.play.services.location)

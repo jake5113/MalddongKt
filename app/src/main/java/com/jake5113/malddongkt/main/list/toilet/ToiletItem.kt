@@ -2,6 +2,8 @@ package com.jake5113.malddongkt.main.list.toilet
 
 import android.os.Parcel
 import android.os.Parcelable
+import ted.gun0912.clustering.clustering.TedClusterItem
+import ted.gun0912.clustering.geometry.TedLatLng
 import java.io.Serializable
 
 data class ToiletResponse(
@@ -61,7 +63,7 @@ data class ToiletItem (
     var femaleClosetCnt: String = "-", // 여성 대변기 수
     var femaleChildClosetCnt: String = "-", // 여성 장애인 대변기 수
     var femaleDspsnClosetCnt: String = "-", // 여성 어린이 대변기 수
-) : Serializable {
+) : Serializable, TedClusterItem {
     constructor(
         toiletNm: String, lnmAdres: String, photo: MutableList<String>?, isFavorite: Boolean
     ) : this(toiletNm, lnmAdres, photo, isFavorite, "") {
@@ -70,4 +72,7 @@ data class ToiletItem (
         this.photo = photo
         this.isFavorite = isFavorite
     }
+
+    override fun getTedLatLng(): TedLatLng = TedLatLng(laCrdnt.toDouble(), loCrdnt.toDouble())
+
 }
