@@ -4,6 +4,8 @@ package com.jake5113.malddongkt.main.list.parking
 import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import ted.gun0912.clustering.clustering.TedClusterItem
+import ted.gun0912.clustering.geometry.TedLatLng
 
 data class ParkingResponse(
     val currentCount: String,
@@ -64,7 +66,7 @@ data class ParkingItem(
     var holidayStart: String = "",
     @SerializedName("공휴일운영종료시각")
     var holidayEnd: String = "",
-) : Parcelable{
+) : Parcelable, TedClusterItem {
     constructor(parcel: Parcel) : this(
         parcel.readString()?: "",
         parcel.readString()?: "",
@@ -134,4 +136,6 @@ data class ParkingItem(
         this.lnmAdres = lnmAdres
         this.isFavorite = isFavorite
     }
+
+    override fun getTedLatLng(): TedLatLng = TedLatLng(latitude.toDouble(), longitude.toDouble())
 }

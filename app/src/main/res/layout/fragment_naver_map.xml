@@ -8,10 +8,10 @@
     tools:context=".main.map.NaverMapFragment">
 
     <FrameLayout
-        android:layout_below="@id/appbar_map"
         android:id="@+id/navermap_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/appbar_map"
         android:background="#70777C" />
 
     <!--Tab Map AppBarLayout-->
@@ -39,38 +39,40 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/appbar_map"
-        android:padding="8dp"
         android:layout_marginHorizontal="30dp"
-        >
+        android:padding="8dp">
 
-        <ToggleButton
+        <ImageView
             android:id="@+id/tab_toilet"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginHorizontal="4dp"
             android:layout_weight="1"
             android:background="@drawable/toggle_btn_toilet_selector"
+            android:checked="true"
             android:textOff=""
             android:textOn="" />
 
-        <ToggleButton
+        <ImageView
             android:id="@+id/tab_tourist_spot"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginHorizontal="4dp"
             android:layout_weight="1"
             android:background="@drawable/toggle_btn_tourist_selector"
+            android:checked="true"
             android:text="관광지"
             android:textOff=""
             android:textOn="" />
 
-        <ToggleButton
+        <ImageView
             android:id="@+id/tab_parking"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginHorizontal="4dp"
             android:layout_weight="1"
             android:background="@drawable/toggle_btn_parking_selector"
+            android:checked="true"
             android:text="주차장"
             android:textOff=""
             android:textOn="" />
