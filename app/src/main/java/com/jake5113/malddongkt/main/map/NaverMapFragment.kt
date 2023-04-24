@@ -24,14 +24,13 @@ import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.InfoWindow
 import com.naver.maps.map.overlay.Marker
-import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.overlay.Overlay.OnClickListener
 import com.naver.maps.map.util.MarkerIcons
 import ted.gun0912.clustering.naver.TedNaverClustering
 import java.io.Serializable
 
 class NaverMapFragment : Fragment(), OnMapReadyCallback {
-    lateinit var binding: FragmentNaverMapBinding
+    private lateinit var binding: FragmentNaverMapBinding
     private var myLocation: LatLng? = LatLng(37.5667, 126.9783)
     fun getMyLocation(location: Location) {
         myLocation = LatLng(location.latitude, location.longitude)
@@ -55,13 +54,18 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
 
         mapFragment.getMapAsync(this)
 
+        binding.tabTouristSpot
+        binding.tabParking
+
 
         return binding.root
     }
 
-    private lateinit var markerToiletItem : ToiletItem
-    private lateinit var markerTouristItem : TouristSpotItem
-    private lateinit var markerParkingItem : ParkingItem
+
+    private lateinit var markerToiletItem: ToiletItem
+    private lateinit var markerTouristItem: TouristSpotItem
+    private lateinit var markerParkingItem: ParkingItem
+
     override fun onMapReady(naverMap: NaverMap) {
 
         // 내 위치 마커
@@ -74,16 +78,17 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
         myMarker.icon = MarkerIcons.RED
         myMarker.map = naverMap
 
-        val toiletMarkerInfoWindow = InfoWindow()
-        val touristMarkerInfoWindow = InfoWindow()
-        val parkingMarkerInfoWindow = InfoWindow()
+        val toiletInfoWindow = InfoWindow()
+        val touristInfoWindow = InfoWindow()
+        val parkingInfoWindow = InfoWindow()
 
         fun closeInfoWindow() {
-            toiletMarkerInfoWindow.close()
-            touristMarkerInfoWindow.close()
-            parkingMarkerInfoWindow.close()
+            toiletInfoWindow.close()
+            touristInfoWindow.close()
+            parkingInfoWindow.close()
         }
 
+        // 지도 클릭시 이벤트 처리 -> 열려있는 InfoWindow 전부 닫기
         naverMap.setOnMapClickListener { pointF, latLng ->
             closeInfoWindow()
         }
@@ -95,14 +100,14 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
                     captionText = it.toiletNm
                     width = Marker.SIZE_AUTO
                     height = Marker.SIZE_AUTO
-                    icon = MarkerIcons.YELLOW
-                    captionOffset = 30
+                    icon = MarkerIcons.BLACK
+                    iconTintColor = Integer.parseInt("FFE37E", 16)
                 }
             }
             .markerClickListener {
                 closeInfoWindow()
                 markerToiletItem = it
-                toiletMarkerInfoWindow.apply {
+                toiletInfoWindow.apply {
                     position = LatLng(it.laCrdnt.toDouble(), it.loCrdnt.toDouble())
                     adapter = object : InfoWindow.DefaultTextAdapter(requireContext()) {
                         override fun getText(infoWindow: InfoWindow): CharSequence = it.toiletNm
@@ -116,7 +121,7 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
                 }
             }
             .clusterAnimation(true)
-            .minClusterSize(10)
+            .minClusterSize(5)
             .make()
 
         TedNaverClustering.with<TouristSpotItem>(requireContext(), naverMap)
@@ -126,14 +131,14 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
                     captionText = it.title
                     width = Marker.SIZE_AUTO
                     height = Marker.SIZE_AUTO
-                    icon = MarkerIcons.GREEN
-                    captionOffset = 30
+                    icon = MarkerIcons.BLACK
+                    iconTintColor = Integer.parseInt("96E389", 16)
                 }
             }
             .markerClickListener {
                 closeInfoWindow()
                 markerTouristItem = it
-                touristMarkerInfoWindow.apply {
+                touristInfoWindow.apply {
                     position = LatLng(it.latitude.toDouble(), it.longitude.toDouble())
                     adapter = object : InfoWindow.DefaultTextAdapter(requireContext()) {
                         override fun getText(infoWindow: InfoWindow): CharSequence = it.title
@@ -147,7 +152,7 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
                 }
             }
             .clusterAnimation(true)
-            .minClusterSize(10)
+            .minClusterSize(5)
             .make()
 
         TedNaverClustering.with<ParkingItem>(requireContext(), naverMap)
@@ -157,14 +162,13 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
                     captionText = it.name
                     width = Marker.SIZE_AUTO
                     height = Marker.SIZE_AUTO
-                    icon = MarkerIcons.BLUE
-                    captionOffset = 30
+                    icon = MarkerIcons.BLACK
+                    iconTintColor = Integer.parseInt("AECFFF", 16)
                 }
-            }
-            .markerClickListener {
+            }.markerClickListener {
                 closeInfoWindow()
                 markerParkingItem = it
-                parkingMarkerInfoWindow.apply {
+                parkingInfoWindow.apply {
                     position = LatLng(it.latitude.toDouble(), it.longitude.toDouble())
                     adapter = object : InfoWindow.DefaultTextAdapter(requireContext()) {
                         override fun getText(infoWindow: InfoWindow): CharSequence = it.name
@@ -178,7 +182,7 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
                 }
             }
             .clusterAnimation(true)
-            .minClusterSize(10)
+            .minClusterSize(5)
             .make()
 
         naverMap.moveCamera(CameraUpdate.scrollTo(myMarker.position))

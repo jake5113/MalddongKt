@@ -26,14 +26,17 @@ class ListContainerFragment : Fragment() {
 
     lateinit var binding: FragmentListContainerBinding
 
+    // 장소 전체 리스트
     val totalItemsToilet: MutableList<ToiletItem> = mutableListOf()
     val totalItemsTourist: MutableList<TouristSpotItem> = mutableListOf()
     val totalItemsParking: MutableList<ParkingItem> = mutableListOf()
 
+    // 지역별 정렬시 보여줄 리스트
     var categoryItemsToilet: MutableList<ToiletItem> = mutableListOf()
     var categoryItemsTourist: MutableList<TouristSpotItem> = mutableListOf()
     var categoryItemsParking: MutableList<ParkingItem> = mutableListOf()
 
+    // 스피너에 보여줄 지역 리스트
     var spinnerItemsCategory = mutableListOf<String>()
     lateinit var spinnerAdapter: ArrayAdapter<String>
 
