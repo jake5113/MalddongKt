@@ -8,6 +8,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import com.jake5113.malddongkt.R
 import com.jake5113.malddongkt.databinding.FragmentNaverMapBinding
 import com.jake5113.malddongkt.main.MainActivity
@@ -26,6 +29,7 @@ import com.naver.maps.map.overlay.InfoWindow
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.Overlay.OnClickListener
 import com.naver.maps.map.util.MarkerIcons
+import ted.gun0912.clustering.clustering.Cluster
 import ted.gun0912.clustering.naver.TedNaverClustering
 import java.io.Serializable
 
@@ -73,7 +77,7 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
         //myMarker.position = myLocation!!
 
         // 임시 테스트 좌표
-        myMarker.position = LatLng(33.426865, 126.505775)
+        myMarker.position = LatLng(33.426865, 126.505773)
 
         myMarker.icon = MarkerIcons.RED
         myMarker.map = naverMap
@@ -93,6 +97,14 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
             closeInfoWindow()
         }
 
+        naverMap.moveCamera(CameraUpdate.scrollTo(myMarker.position))
+
+        // 내 위치 버튼 누를 때
+        binding.ibMyLocation.setOnClickListener {
+            (activity as MainActivity).requestMyLocation()
+            naverMap.moveCamera(CameraUpdate.scrollTo(myMarker.position))
+        }
+
         TedNaverClustering.with<ToiletItem>(requireContext(), naverMap)
             .items(totalItemsToilet)
             .customMarker {
@@ -103,17 +115,17 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
                     icon = MarkerIcons.BLACK
                     iconTintColor = Integer.parseInt("FFE37E", 16)
                 }
-            }
-            .markerClickListener {
+            }.markerClickListener {
                 closeInfoWindow()
                 markerToiletItem = it
                 toiletInfoWindow.apply {
                     position = LatLng(it.laCrdnt.toDouble(), it.loCrdnt.toDouble())
                     adapter = object : InfoWindow.DefaultTextAdapter(requireContext()) {
-                        override fun getText(infoWindow: InfoWindow): CharSequence = it.toiletNm
+                        override fun getText(infoWindow: InfoWindow): CharSequence =
+                            it.toiletNm
                     }
                     open(naverMap)
-                }.onClickListener = OnClickListener {
+                }.setOnClickListener {
                     val intent = Intent(context, ToiletDetailActivity::class.java)
                     intent.putExtra("toiletItem", markerToiletItem as Serializable)
                     requireContext().startActivity(intent)
@@ -134,14 +146,14 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
                     icon = MarkerIcons.BLACK
                     iconTintColor = Integer.parseInt("96E389", 16)
                 }
-            }
-            .markerClickListener {
+            }.markerClickListener {
                 closeInfoWindow()
                 markerTouristItem = it
                 touristInfoWindow.apply {
                     position = LatLng(it.latitude.toDouble(), it.longitude.toDouble())
                     adapter = object : InfoWindow.DefaultTextAdapter(requireContext()) {
-                        override fun getText(infoWindow: InfoWindow): CharSequence = it.title
+                        override fun getText(infoWindow: InfoWindow): CharSequence =
+                            it.title
                     }
                     open(naverMap)
                 }.onClickListener = OnClickListener {
@@ -184,13 +196,5 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
             .clusterAnimation(true)
             .minClusterSize(5)
             .make()
-
-        naverMap.moveCamera(CameraUpdate.scrollTo(myMarker.position))
-
-        // 내 위치 버튼 누를 때
-        binding.ibMyLocation.setOnClickListener {
-            (activity as MainActivity).requestMyLocation()
-            naverMap.moveCamera(CameraUpdate.scrollTo(myMarker.position))
-        }
     }
 }
