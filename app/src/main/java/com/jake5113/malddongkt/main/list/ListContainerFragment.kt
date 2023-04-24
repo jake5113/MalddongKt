@@ -68,10 +68,10 @@ class ListContainerFragment : Fragment() {
         binding.spinner.dropDownVerticalOffset = 230
 
 
-        // 검색창에 포커스 돼있지 않으면 닫기.
-        binding.searchView.setOnQueryTextFocusChangeListener { v, hasFocus ->
+        // TODO 검색창에 포커스 돼있지 않으면 닫기.
+        /*binding.searchView.setOnQueryTextFocusChangeListener { v, hasFocus ->
             if (!hasFocus) binding.searchView.isIconified = true
-        }
+        }*/
 
         // 리사이클러 모양 타입 설정 리스너
         binding.rgRecyclerTypeSelection.setOnCheckedChangeListener { group, checkedId ->

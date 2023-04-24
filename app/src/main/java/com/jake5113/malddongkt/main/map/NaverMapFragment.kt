@@ -74,10 +74,10 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
 
         // 내 위치 마커
         val myMarker = Marker()
-        //myMarker.position = myLocation!!
+        myMarker.position = myLocation!!
 
         // 임시 테스트 좌표
-        myMarker.position = LatLng(33.426865, 126.505773)
+        //myMarker.position = LatLng(33.426865, 126.505773)
 
         myMarker.icon = MarkerIcons.RED
         myMarker.map = naverMap

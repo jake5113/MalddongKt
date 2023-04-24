@@ -84,10 +84,11 @@ class MainActivity : AppCompatActivity() {
                 )
 
                 R.id.item_map -> transaction.replace(R.id.fragment_container_view, naverMapFragment)
-                R.id.item_mypage -> transaction.replace(
+                /*TODO 추후 업데이트
+                   R.id.item_mypage -> transaction.replace(
                     R.id.fragment_container_view,
                     mypageFragment
-                )
+                )*/
             }
             transaction.commit()
             true
@@ -115,7 +116,6 @@ class MainActivity : AppCompatActivity() {
         ) {
             return
         }
-
         providerClient.requestLocationUpdates(request, locationCallback, Looper.getMainLooper())
     }
 

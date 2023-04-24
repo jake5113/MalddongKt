@@ -6,8 +6,8 @@
     <item
         android:id="@+id/item_map"
         android:title="MAP" />
-    <item
+<!--    <item
         android:id="@+id/item_mypage"
-        android:title="MY PAGE" />
+        android:title="MY PAGE" />-->
 
 </menu>
