@@ -12,7 +12,7 @@
         android:id="@+id/parking_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/lineseedsans_a_bd"
+        android:fontFamily="@font/lineseedsanskr_bd"
         android:text="주차장 이름"
         android:textAlignment="center"
         android:textSize="20sp"

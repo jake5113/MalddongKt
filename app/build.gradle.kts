@@ -85,4 +85,9 @@ dependencies {
     // swipe refresh layout
     implementation(libs.androidx.swiperefreshlayout)
 
+    // Room
+//    implementation(libs.androidx.room.runtime)
+//    implementation(libs.androidx.room.compiler)
+
 }
+

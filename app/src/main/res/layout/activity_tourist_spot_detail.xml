@@ -12,7 +12,7 @@
         android:id="@+id/tourist_nm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/lineseedsans_a_bd"
+        android:fontFamily="@font/lineseedsanskr_bd"
         android:text="관광지 이름"
         android:textAlignment="center"
         android:textSize="20sp"

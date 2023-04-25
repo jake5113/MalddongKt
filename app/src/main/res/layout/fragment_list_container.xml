@@ -76,7 +76,7 @@
                     android:layout_height="24dp"
                     android:layout_margin="4dp"
                     android:background="@drawable/btn_radio_recycler_grid_style"
-                    android:button="@font/lineseedsans_a_bd"
+                    android:button="@font/lineseedsanskr_bd"
                     android:checked="true"
                     android:scaleType="center" />
 
@@ -86,7 +86,7 @@
                     android:layout_height="24dp"
                     android:layout_margin="4dp"
                     android:background="@drawable/btn_radio_recycler_list_style"
-                    android:button="@font/lineseedsans_a_bd"
+                    android:button="@font/lineseedsanskr_bd"
                     android:scaleType="center" />
 
             </RadioGroup>
