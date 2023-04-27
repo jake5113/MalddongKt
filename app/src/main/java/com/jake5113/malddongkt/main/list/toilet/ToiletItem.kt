@@ -2,6 +2,8 @@ package com.jake5113.malddongkt.main.list.toilet
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import ted.gun0912.clustering.clustering.TedClusterItem
 import ted.gun0912.clustering.geometry.TedLatLng
 import java.io.Serializable
@@ -31,6 +33,7 @@ data class Items(
     var item: MutableList<ToiletItem>
 )
 
+@Entity
 data class ToiletItem (
     var toiletNm: String, // 화장실 명
     var lnmAdres: String, // 지번주소
@@ -74,5 +77,9 @@ data class ToiletItem (
     }
 
     override fun getTedLatLng(): TedLatLng = TedLatLng(laCrdnt.toDouble(), loCrdnt.toDouble())
+
+    @PrimaryKey(autoGenerate = true)
+    var num:Int = 0
+
 
 }

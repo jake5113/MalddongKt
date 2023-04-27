@@ -86,8 +86,10 @@ dependencies {
     implementation(libs.androidx.swiperefreshlayout)
 
     // Room
-//    implementation(libs.androidx.room.runtime)
-//    implementation(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
 
+    // Coroutine
+    implementation(libs.androidx.lifecycle.livedata)
 }
 

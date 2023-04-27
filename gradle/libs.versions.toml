@@ -1,5 +1,5 @@
 [versions]
-com-android-application = "8.1.0-alpha11"
+com-android-application = "8.2.0-alpha01"
 converter-gson = "2.9.0"
 converter-scalars = "2.9.0"
 glide = "4.15.1"
@@ -35,8 +35,9 @@ circleimageview = { group = "de.hdodenhof", name = "circleimageview", version = 
 play-services-location = { group = "com.google.android.gms", name = "play-services-location", version = "21.0.1" }
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version = "1.1.0" }
 tedclustering-naver = { group = "io.github.ParkSangGwon", name = "tedclustering-naver", version = "1.0.2" }
-#androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version = "2.5.1" }
-#androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version = "2.5.1" }
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version = "2.5.1" }
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version = "2.5.1" }
+androidx-lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata", version = "2.6.1" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "com-android-application" }
