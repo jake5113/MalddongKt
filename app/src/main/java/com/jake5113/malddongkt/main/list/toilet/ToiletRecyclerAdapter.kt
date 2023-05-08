@@ -2,7 +2,6 @@ package com.jake5113.malddongkt.main.list.toilet
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.DialogInterface.OnClickListener
 import android.content.Intent
 import android.location.Location
 import android.location.LocationManager
@@ -16,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.jake5113.malddongkt.R
+import com.jake5113.malddongkt.database.ToiletItem
 import com.jake5113.malddongkt.main.MainActivity
 import java.io.Serializable
 

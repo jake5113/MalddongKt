@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.bumptech.glide.Glide
 import com.jake5113.malddongkt.R
+import com.jake5113.malddongkt.database.ParkingItem
 import com.jake5113.malddongkt.main.MainActivity
 import com.jake5113.malddongkt.main.list.toilet.VH
 

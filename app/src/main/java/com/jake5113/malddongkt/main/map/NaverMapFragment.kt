@@ -8,18 +8,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.core.view.isGone
-import androidx.core.view.isVisible
 import com.jake5113.malddongkt.R
 import com.jake5113.malddongkt.databinding.FragmentNaverMapBinding
 import com.jake5113.malddongkt.main.MainActivity
 import com.jake5113.malddongkt.main.list.parking.ParkingDetailActivity
-import com.jake5113.malddongkt.main.list.parking.ParkingItem
+import com.jake5113.malddongkt.database.ParkingItem
 import com.jake5113.malddongkt.main.list.toilet.ToiletDetailActivity
-import com.jake5113.malddongkt.main.list.toilet.ToiletItem
+import com.jake5113.malddongkt.database.ToiletItem
 import com.jake5113.malddongkt.main.list.touristspot.TouristSpotDetailActivity
-import com.jake5113.malddongkt.main.list.touristspot.TouristSpotItem
+import com.jake5113.malddongkt.database.TouristSpotItem
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.MapFragment
@@ -29,7 +26,6 @@ import com.naver.maps.map.overlay.InfoWindow
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.Overlay.OnClickListener
 import com.naver.maps.map.util.MarkerIcons
-import ted.gun0912.clustering.clustering.Cluster
 import ted.gun0912.clustering.naver.TedNaverClustering
 import java.io.Serializable
 

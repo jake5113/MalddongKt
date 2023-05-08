@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.jake5113.malddongkt.R
+import com.jake5113.malddongkt.database.ToiletItem
 import com.jake5113.malddongkt.databinding.ActivityToiletDetailBinding
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate

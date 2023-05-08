@@ -1,7 +1,5 @@
-package com.jake5113.malddongkt.main.list.toilet
+package com.jake5113.malddongkt.database
 
-import android.os.Parcel
-import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import ted.gun0912.clustering.clustering.TedClusterItem

@@ -1,5 +1,5 @@
 [versions]
-com-android-application = "8.2.0-alpha01"
+com-android-application = "8.2.0-alpha02"
 converter-gson = "2.9.0"
 converter-scalars = "2.9.0"
 glide = "4.15.1"

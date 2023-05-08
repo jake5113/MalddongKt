@@ -5,15 +5,14 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.jake5113.malddongkt.R
+import com.jake5113.malddongkt.database.ParkingItem
 import com.jake5113.malddongkt.databinding.ActivityParkingDetailBinding
-import com.jake5113.malddongkt.main.list.toilet.ToiletItem
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.InfoWindow
-import com.naver.maps.map.overlay.Marker
 
 class ParkingDetailActivity : AppCompatActivity(), OnMapReadyCallback {
 
