@@ -11,8 +11,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.bumptech.glide.Glide
 import com.jake5113.malddongkt.R
+import com.jake5113.malddongkt.database.TouristSpotItem
 import com.jake5113.malddongkt.main.MainActivity
-import com.jake5113.malddongkt.main.list.toilet.ToiletDetailActivity
 import com.jake5113.malddongkt.main.list.toilet.VH
 import java.io.Serializable
 

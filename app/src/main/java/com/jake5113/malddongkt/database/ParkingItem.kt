@@ -1,4 +1,4 @@
-package com.jake5113.malddongkt.main.list.parking
+package com.jake5113.malddongkt.database
 
 
 import android.os.Parcel

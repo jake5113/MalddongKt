@@ -1,4 +1,4 @@
-package com.jake5113.malddongkt.main.list.touristspot
+package com.jake5113.malddongkt.database
 
 import ted.gun0912.clustering.clustering.TedClusterItem
 import ted.gun0912.clustering.geometry.TedLatLng

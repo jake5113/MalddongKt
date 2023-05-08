@@ -1,8 +1,8 @@
 package com.jake5113.malddongkt.network
 
-import com.jake5113.malddongkt.main.list.parking.ParkingResponse
-import com.jake5113.malddongkt.main.list.toilet.ToiletResponse
-import com.jake5113.malddongkt.main.list.touristspot.TouristResponse
+import com.jake5113.malddongkt.database.ParkingResponse
+import com.jake5113.malddongkt.database.ToiletResponse
+import com.jake5113.malddongkt.database.TouristResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

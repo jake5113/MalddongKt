@@ -19,9 +19,9 @@ import com.google.android.gms.location.Priority
 import com.jake5113.malddongkt.R
 import com.jake5113.malddongkt.databinding.ActivityMainBinding
 import com.jake5113.malddongkt.main.list.ListContainerFragment
-import com.jake5113.malddongkt.main.list.parking.ParkingResponse
-import com.jake5113.malddongkt.main.list.toilet.ToiletResponse
-import com.jake5113.malddongkt.main.list.touristspot.TouristResponse
+import com.jake5113.malddongkt.database.ParkingResponse
+import com.jake5113.malddongkt.database.ToiletResponse
+import com.jake5113.malddongkt.database.TouristResponse
 import com.jake5113.malddongkt.main.mypage.MypageFragment
 import com.jake5113.malddongkt.main.map.NaverMapFragment
 import com.jake5113.malddongkt.network.RetrofitApiService

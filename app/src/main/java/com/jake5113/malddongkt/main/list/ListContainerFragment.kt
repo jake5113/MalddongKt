@@ -16,10 +16,10 @@ import com.jake5113.malddongkt.R
 import com.jake5113.malddongkt.databinding.FragmentListContainerBinding
 import com.jake5113.malddongkt.main.MainActivity
 import com.jake5113.malddongkt.main.list.parking.ParkingRecyclerAdapter
-import com.jake5113.malddongkt.main.list.parking.ParkingItem
-import com.jake5113.malddongkt.main.list.toilet.ToiletItem
+import com.jake5113.malddongkt.database.ParkingItem
+import com.jake5113.malddongkt.database.ToiletItem
 import com.jake5113.malddongkt.main.list.toilet.ToiletRecyclerAdapter
-import com.jake5113.malddongkt.main.list.touristspot.TouristSpotItem
+import com.jake5113.malddongkt.database.TouristSpotItem
 import com.jake5113.malddongkt.main.list.touristspot.TouristSpotRecyclerAdapter
 
 class ListContainerFragment : Fragment() {

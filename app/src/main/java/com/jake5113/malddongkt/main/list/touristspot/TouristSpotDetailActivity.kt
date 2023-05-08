@@ -6,6 +6,7 @@ import com.jake5113.malddongkt.R
 import android.annotation.SuppressLint
 import android.os.Build
 import com.bumptech.glide.Glide
+import com.jake5113.malddongkt.database.TouristSpotItem
 import com.jake5113.malddongkt.databinding.ActivityTouristSpotDetailBinding
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
